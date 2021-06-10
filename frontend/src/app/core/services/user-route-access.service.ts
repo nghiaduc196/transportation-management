@@ -6,7 +6,7 @@ import {StateStorageService} from './state-storage.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserRouteAccessService implements CanActivate{
+export class UserRouteAccessService implements CanActivate {
 
   constructor(private router: Router,
               private accountService: AccountService,

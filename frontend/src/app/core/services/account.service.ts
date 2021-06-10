@@ -3,7 +3,6 @@ import {Observable, Subject} from 'rxjs';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Account} from '../model/account.model';
 import {environment} from '../../../environments/environment';
-
 import {User} from '../model/user.model';
 
 @Injectable({

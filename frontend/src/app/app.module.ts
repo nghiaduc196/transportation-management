@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
 import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -46,10 +45,19 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './blocks/interceptor/auth.interceptor';
 import {AuthExpiredInterceptor} from './blocks/interceptor/auth-expired.interceptor';
 import {ErrorHandlerInterceptor} from './blocks/interceptor/errorhandler.interceptor';
+import {NgJhipsterModule} from 'ng-jhipster';
+import {NgxWebstorageModule} from 'ngx-webstorage';
 
 @NgModule({
   imports: [
     BrowserModule,
+    HttpClientModule,
+    NgJhipsterModule.forRoot({
+      // set below to true to make alerts look like toast
+      alertAsToast: false,
+      alertTimeout: 5000
+    }),
+    NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
     AppRoutingModule,
     AppAsideModule,
