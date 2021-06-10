@@ -42,6 +42,10 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthInterceptor} from './blocks/interceptor/auth.interceptor';
+import {AuthExpiredInterceptor} from './blocks/interceptor/auth-expired.interceptor';
+import {ErrorHandlerInterceptor} from './blocks/interceptor/errorhandler.interceptor';
 
 @NgModule({
   imports: [
@@ -72,6 +76,22 @@ import { ChartsModule } from 'ng2-charts';
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
+    },
+    HttpClientModule,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthExpiredInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandlerInterceptor,
+      multi: true
     },
     IconSetService,
   ],
