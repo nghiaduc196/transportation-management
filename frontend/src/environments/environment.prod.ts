@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  api: 'http://vcna.top/api/',
+  host: 'http://vcna.top/'
 };
