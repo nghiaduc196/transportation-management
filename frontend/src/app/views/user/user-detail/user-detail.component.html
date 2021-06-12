@@ -1,0 +1,67 @@
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header">
+            Chi tiết người dùng
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6" style="margin-bottom: 20px">
+                        <div class="p-field">
+                            <label>Họ tên</label>
+                            <input type="username" [ngModel]="userData?.fullName" readonly pInputText/>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 20px">
+                        <div class="p-field">
+                            <label>Số điện thoại</label>
+                            <input type="username" [ngModel]="userData?.phoneNumber" readonly pInputText/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="margin-bottom: 20px">
+                        <div class="p-field">
+                            <label>Email</label>
+                            <input type="username" [ngModel]="userData?.email" readonly pInputText/>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 20px">
+                        <div class="p-field">
+                            <label>Địa chỉ</label>
+                            <input type="username" [ngModel]="address" readonly pInputText/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="margin-bottom: 20px">
+                        <div class="p-field">
+                            <label>Quyền</label>
+                            <input type="username" [ngModel]="userData?.authorities[0]" readonly pInputText/>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 20px">
+                        <div class="p-field">
+                            <label>Đánh giá</label>
+                            <input type="username" [ngModel]="userData?.rating" readonly pInputText/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="margin-bottom: 20px">
+                        <div class="p-field">
+                            <label>Số tiền giao dịch</label>
+                            <input type="username" [ngModel]="userData?.totalMoney" readonly pInputText/>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 20px">
+                        <div class="p-field">
+                            <label>Số lượng giao dịch</label>
+                            <input type="username" [ngModel]="userData?.transaction" readonly pInputText/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

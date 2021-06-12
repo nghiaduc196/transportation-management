@@ -77,7 +77,6 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    LoginComponent,
     RegisterComponent
   ],
   providers: [

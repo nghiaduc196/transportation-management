@@ -1,0 +1,102 @@
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header">
+            Chỉnh sửa người dùng
+        </div>
+        <div class="card-body">
+            <form [formGroup]="userForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info">Tên người dùng</span>
+                            </div>
+                            <input type="text" class="form-control"
+                                   value="{{dataUser?.fullName}}"
+                                   readonly>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info">Người tạo</span>
+                            </div>
+                            <input type="text" class="form-control" value="{{dataUser?.createdBy}}" readonly>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info">Ngày tạo</span>
+                            </div>
+                            <input type="text" class="form-control"
+                                   value="{{dataUser?.createdDate | date:'dd-MM-yyyy H:mm'}}" readonly>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info">Trạng thái</span>
+                            </div>
+                            <div style="width: calc(100% - 130px)">
+                                <p-toggleButton formControlName="activated" onLabel="Hoạt động" (onChange)="fake($event)"
+                                                offLabel="Ngừng hoạt động" onIcon="pi pi-lock-open"
+                                                offIcon="pi pi-lock" [style]="{'width': '100%'}"></p-toggleButton>
+                            </div>
+                            <!--                        <input type="text" class="form-control"  readonly>-->
+                        </div>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text text-info">Nâng cấp</span>
+                          </div>
+                          <button *ngIf="!alreadyPro" pButton pRipple (click)="updatePro()" type="button"
+                                  label="Nâng cấp kinh doanh chuyên nghiệp"
+                                  class="p-button-raised p-button-secondary"></button>
+                          <button *ngIf="alreadyPro" pButton pRipple (click)="updateNormal()" type="button"
+                                  label="Người dùng thường"
+                                  class="p-button-raised p-button-secondary"></button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info">Số điện thoại</span>
+                            </div>
+                            <input type="text" class="form-control"
+                                   value="{{dataUser?.phoneNumber ? dataUser.phoneNumber : 'Chưa có số điện thoại'}}"
+                                   readonly>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info">Địa chỉ</span>
+                            </div>
+                            <input type="text" class="form-control"
+                                   value="{{dataUser?.province ? dataUser.district.name +', '+ dataUser.province.name : 'Chưa có địa chỉ'  }}"
+                                   readonly>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info">Email</span>
+                            </div>
+                            <input type="text" class="form-control"
+                                   value="{{dataUser?.email ? dataUser?.email : 'Chưa có email2'}}" readonly>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-info">Tên đăng nhập</span>
+                            </div>
+                            <input type="text" class="form-control" value="{{dataUser?.login}}" readonly>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-auto mr-auto">
+                    <button pButton pRipple (click)="backToPrevious()" icon="pi pi-chevron-left" type="button"
+                            label="Quay lại"
+                            class="p-button-raised p-button-secondary"></button>
+                </div>
+                <div class="col-auto">
+                    <button pButton pRipple (click)="saveUser()" icon="pi pi-pencil" type="button" label="Lưu lại"
+                            class="p-button-raised p-button-success"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

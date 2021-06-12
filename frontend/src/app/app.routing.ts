@@ -6,8 +6,8 @@ import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import {UserRouteAccessService} from './core/services/user-route-access.service';
 
 export const routes: Routes = [
   {
@@ -31,9 +31,9 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent,
+    loadChildren: () => import('./views/login/login.module').then(m => m.LoginModule),
     data: {
-      title: 'Login Page'
+      title: 'Trang đăng nhập'
     }
   },
   {
@@ -46,10 +46,15 @@ export const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate: [UserRouteAccessService],
     data: {
       title: 'Home'
     },
     children: [
+      {
+        path: 'user',
+        loadChildren: () => import('./views/user/user.module').then(m => m.UserModule)
+      },
       {
         path: 'base',
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)

@@ -1,28 +1,61 @@
-import { INavData } from '@coreui/angular';
+import {ROLE} from './core/model/role.model';
 
-export const navItems: INavData[] = [
+interface NavAttributes {
+  [propName: string]: any;
+}
+interface NavWrapper {
+  attributes: NavAttributes;
+  element: string;
+}
+interface NavBadge {
+  text: string;
+  variant: string;
+}
+interface NavLabel {
+  class?: string;
+  variant: string;
+}
+
+export interface NavData {
+  name?: string;
+  url?: string;
+  icon?: string;
+  badge?: NavBadge;
+  title?: boolean;
+  children?: NavData[];
+  variant?: string;
+  attributes?: NavAttributes;
+  divider?: boolean;
+  class?: string;
+  label?: NavLabel;
+  wrapper?: NavWrapper;
+  role?: string;
+  authorities?: string[];
+}
+
+
+export const navItems: NavData[] = [
   {
     name: 'Dashboard',
     url: '/dashboard',
     icon: 'icon-speedometer',
-    badge: {
-      variant: 'info',
-      text: 'NEW'
-    }
   },
   {
     title: true,
-    name: 'Theme'
+    name: 'Quản lý',
+    authorities: [ROLE.ADMIN],
   },
   {
-    name: 'Colors',
-    url: '/theme/colors',
-    icon: 'icon-drop'
+    name: 'Quản lý tài khoản',
+    url: '/user',
+    icon: 'icon-drop',
+    authorities: [ROLE.ADMIN]
   },
   {
-    name: 'Typography',
+    name: 'Quản lý quyền',
     url: '/theme/typography',
-    icon: 'icon-pencil'
+    icon: 'icon-pencil',
+    authorities: [ROLE.ADMIN],
   },
   {
     title: true,
@@ -232,20 +265,5 @@ export const navItems: INavData[] = [
       text: 'NEW'
     },
     attributes: { disabled: true },
-  },
-  {
-    name: 'Download CoreUI',
-    url: 'http://coreui.io/angular/',
-    icon: 'icon-cloud-download',
-    class: 'mt-auto',
-    variant: 'success',
-    attributes: { target: '_blank', rel: 'noopener' }
-  },
-  {
-    name: 'Try CoreUI PRO',
-    url: 'http://coreui.io/pro/angular/',
-    icon: 'icon-layers',
-    variant: 'danger',
-    attributes: { target: '_blank', rel: 'noopener' }
   }
 ];
