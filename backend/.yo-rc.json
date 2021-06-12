@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.backend.transportmanagemt"
+    },
+    "jhipsterVersion": "6.10.5",
+    "applicationType": "monolith",
+    "baseName": "backend",
+    "packageName": "com.backend.transportmanagemt",
+    "packageFolder": "com/backend/transportmanagemt",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MjFmY2U4MDc5YjU2Y2VhNDg4ZDk5MjI5ZTEzZGM3MzgyYzU3NmExZDdjMzYyMTg4YzljNDU0YTc1MDc2NzJiZjlhMGIwNDBmMDA1ZTY0YzA1YWM3NTZkNWEzNmZlMmU3ZjA3OTUwM2JiODQ1ZWIyM2YwNWQ2N2ZmYzA2MzA2YTQ=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "skipClient": true,
+    "creationTimestamp": 1623468556667,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
