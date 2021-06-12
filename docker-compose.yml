@@ -5,34 +5,34 @@ networks:
     driver: bridge
 
 services:
-  # backend:
-  #   image: transportmanagement
-  #   restart: always
-  #   volumes:
-  #     - ~/volumes/transportmanagement/data:/usr/local/transport/data
-  #     - ~/volumes/transportmanagement/firebase-config:/usr/local/transport/firebase-config
-  #   environment:
-  #     - TZ=Asia/Ho_Chi_Minh
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,swagger
-  #     - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
-  #     - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/transport?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
-  #     - JHIPSTER_SLEEP=5 # gives time for other services to boot before the application
-  #   ports:
-  #     - 8081:8081
-  # mysql:
-  #   image: mysql:8.0.20
-  #   restart: always
-  #   volumes:
-  #     - ~/volumes/transportmanagement/mysql/:/var/lib/mysql/
-  #   environment:
-  #     - TZ=Asia/Ho_Chi_Minh
-  #     - MYSQL_USER=root
-  #     - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-  #     - MYSQL_DATABASE=cms
-  #   ports:
-  #     - "3306:3306"
-  #   command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp --sql_mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+  backend:
+    image: transportmanagement
+    restart: always
+    volumes:
+      - ~/volumes/transportmanagement/data:/usr/local/transport/data
+      - ~/volumes/transportmanagement/firebase-config:/usr/local/transport/firebase-config
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,swagger
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/transport?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+      - JHIPSTER_SLEEP=5 # gives time for other services to boot before the application
+    ports:
+      - 8081:8081
+  mysql:
+    image: mysql:8.0.20
+    restart: always
+    volumes:
+      - ~/volumes/transportmanagement/mysql/:/var/lib/mysql/
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - MYSQL_USER=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=cms
+    ports:
+      - "3306:3306"
+    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp --sql_mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
   gateway:
     image: openresty/openresty:1.19.3.1-6-centos7
     command: sh -c 'touch /usr/local/openresty/nginx/logs/file.log && chmod 777 /usr/local/openresty/nginx/logs/file.log && mkdir -p -m 777 /var/www/webp && yum -y install libwebp-tools && /usr/bin/openresty -g "daemon off;"'
