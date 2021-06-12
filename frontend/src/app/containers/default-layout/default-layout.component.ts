@@ -24,11 +24,11 @@ export class DefaultLayoutComponent implements OnInit {
     this.accountService.identity(true).then((account: Account) => {
       this.account = account;
       this.navItems = navItems
-        .filter(value => value.authorities == null || this.accountService.hasAnyAuthority(value.authorities))
+        .filter(value => value?.authorities == null || this.accountService.hasAnyAuthority(value.authorities))
         .map(menu => {
           if (menu.children != null) {
             menu.children = menu.children.filter(value2 => {
-              return value2.authorities == null || this.accountService.hasAnyAuthority(value2.authorities);
+              return value2?.authorities == null || this.accountService.hasAnyAuthority(value2.authorities);
             });
           }
           return menu;

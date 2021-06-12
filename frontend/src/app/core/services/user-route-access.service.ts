@@ -25,7 +25,7 @@ export class UserRouteAccessService implements CanActivate {
       if (account === null) {
         this.router.navigate(['login']);
       }
-      if (account.authorities.includes('ROLE_ANONYMOUS') && account.login === 'anonymoususer' || account.login === 'anonymoususer') {
+      if (account?.authorities?.includes('ROLE_ANONYMOUS') && account?.login === 'anonymoususer' || account?.login === 'anonymoususer') {
         this.router.navigate(['login']);
       }
       if (!authorities || authorities.length === 0) {

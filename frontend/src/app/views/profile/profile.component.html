@@ -1,0 +1,60 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header"> <strong>Chi tiết người dùng </strong> </div>
+    <div class="card-body mb-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mt-3">
+            <div class="p-field">
+              <label>Họ tên</label>
+              <input type="text" value="{{account?.firstName}} {{account?.lastName}}" readonly pInputText/>
+            </div>
+          </div>
+          <div class="col-md-6 mt-3">
+            <div class="p-field">
+              <label>Số điện thoại</label>
+              <input type="text" value="{{account?.phoneNumber ? account?.phoneNumber : 'Chưa cập nhật thông tin'}}" readonly pInputText/>
+            </div>
+          </div>
+          <div class="col-md-6 mt-3">
+            <div class="p-field">
+              <label>Email</label>
+              <input type="text" value="{{account?.email}}" readonly pInputText/>
+            </div>
+          </div>
+          <div class="col-md-6 mt-3">
+            <div class="p-field">
+              <label>Chức vụ</label>
+              <input type="text" value="{{account?.position?.name ? account?.position?.name : 'Chưa có thông tin'}}" readonly pInputText/>
+            </div>
+          </div>
+          <div class="col-md-6 mt-3">
+            <div class="p-field">
+              <label>Tỉnh/Thành phố</label>
+              <input type="text" value="{{account?.province?.name ? account?.province?.name : 'Chưa có thông tin'}}" readonly pInputText/>
+            </div>
+          </div>
+          <div class="col-md-6 mt-3">
+            <div class="p-field">
+              <label>Quận/Huyện</label>
+              <input type="text" value="{{account?.province?.name ? account?.province?.name : 'Chưa có thông tin'}}" readonly pInputText/>
+            </div>
+          </div>
+          <div class="col-md-6 mt-3">
+            <div class="p-field">
+              <label>Xã/Phường</label>
+              <input type="text" value="{{account?.province?.name ? account?.province?.name : 'Chưa có thông tin'}}" readonly pInputText/>
+            </div>
+          </div>
+          <div class="col-md-6 mt-3">
+            <div class="p-field">
+              <label>Địa chỉ</label>
+              <input type="text" value="{{account?.province?.name ? account?.province?.name : 'Chưa có thông tin'}}" readonly pInputText/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -6,14 +6,13 @@ import { UserUpdateComponent } from './user-update/user-update.component';
 import {PaginatorModule} from 'primeng/paginator';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {SplitButtonModule} from 'primeng/splitbutton';
-import { UserDetailComponent } from './user-detail/user-detail.component';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
-  declarations: [UserListComponent, UserUpdateComponent, UserDetailComponent],
+  declarations: [UserListComponent, UserUpdateComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

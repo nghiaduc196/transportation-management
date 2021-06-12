@@ -3,6 +3,8 @@ package com.backend.transportmanagemt.service.dto;
 import com.backend.transportmanagemt.domain.*;
 
 import java.time.Instant;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class UserResponseDTO {
     private Long id;
@@ -11,7 +13,7 @@ public class UserResponseDTO {
     private String lastName;
     private String email;
     private String imageUrl;
-    private boolean activated = false;
+    private boolean activated;
     private String createdBy;
     private Instant createdDate;
     private Position position;
@@ -19,6 +21,9 @@ public class UserResponseDTO {
     private District district;
     private Ward ward;
     private String phone;
+    private String address;
+    private Set<String> authorities;
+
 
     public UserResponseDTO(User user) {
         this.id = user.getId();
@@ -35,6 +40,10 @@ public class UserResponseDTO {
         this.district = user.getDistrict();
         this.ward = user.getWard();
         this.phone = user.getPhoneNumber();
+        this.address = user.getAddress();
+        this.authorities = user.getAuthorities().stream()
+            .map(Authority::getName)
+            .collect(Collectors.toSet());
     }
 
     public Long getId() {
@@ -147,5 +156,21 @@ public class UserResponseDTO {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Set<String> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<String> authorities) {
+        this.authorities = authorities;
     }
 }

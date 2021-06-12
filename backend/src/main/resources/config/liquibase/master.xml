@@ -18,7 +18,7 @@
     <include file="changelog/00000000000002_insert_province_table.sql" relativeToChangelogFile="true"/>
     <include file="changelog/00000000000003_insert_district_table.sql" relativeToChangelogFile="true"/>
     <include file="changelog/00000000000004_insert_ward_table.sql" relativeToChangelogFile="true"/>
-    <include file="changelog/00000000000005_add_province_code_district_code_ward_code_user_table.sql" relativeToChangelogFile="true"/>
+    <include file="changelog/00000000000005_column_user_table.sql" relativeToChangelogFile="true"/>
     <include file="changelog/00000000000006_create_position_table.sql" relativeToChangelogFile="true"/>
 
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->

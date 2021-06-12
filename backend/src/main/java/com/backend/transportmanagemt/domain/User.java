@@ -107,6 +107,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @JoinColumn(name = "ward_code", referencedColumnName = "code")
     private Ward ward;
 
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "fcm_token")
     private String fcmToken;
 
@@ -273,6 +276,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override

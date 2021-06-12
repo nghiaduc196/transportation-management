@@ -7,6 +7,7 @@ import com.backend.transportmanagemt.service.MailService;
 import com.backend.transportmanagemt.service.UserService;
 import com.backend.transportmanagemt.service.dto.PasswordChangeDTO;
 import com.backend.transportmanagemt.service.dto.UserDTO;
+import com.backend.transportmanagemt.service.dto.UserResponseDTO;
 import com.backend.transportmanagemt.web.rest.errors.*;
 import com.backend.transportmanagemt.web.rest.vm.KeyAndPasswordVM;
 import com.backend.transportmanagemt.web.rest.vm.ManagedUserVM;
@@ -100,9 +101,9 @@ public class AccountResource {
      * @throws RuntimeException {@code 500 (Internal Server Error)} if the user couldn't be returned.
      */
     @GetMapping("/account")
-    public UserDTO getAccount() {
+    public UserResponseDTO getAccount() {
         return userService.getUserWithAuthorities()
-            .map(UserDTO::new)
+            .map(UserResponseDTO::new)
             .orElseThrow(() -> new AccountResourceException("User could not be found"));
     }
 
