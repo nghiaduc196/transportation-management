@@ -9,6 +9,7 @@ import com.backend.transportmanagemt.security.AuthoritiesConstants;
 import com.backend.transportmanagemt.security.SecurityUtils;
 import com.backend.transportmanagemt.service.dto.UserDTO;
 
+import com.backend.transportmanagemt.service.dto.UserResponseDTO;
 import io.github.jhipster.security.RandomUtil;
 
 import org.slf4j.Logger;
@@ -257,6 +258,11 @@ public class UserService {
     @Transactional(readOnly = true)
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
         return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<UserResponseDTO> getAllUsers(Pageable pageable) {
+        return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserResponseDTO::new);
     }
 
     @Transactional(readOnly = true)

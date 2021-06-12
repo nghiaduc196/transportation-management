@@ -47,9 +47,20 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Quản lý tài khoản',
-    url: '/user',
     icon: 'icon-drop',
-    authorities: [ROLE.ADMIN]
+    authorities: [ROLE.ADMIN],
+    children: [
+      {
+        name: 'Danh sách tài khoản',
+        url: '/user',
+        icon: 'icon-cursor'
+      },
+      {
+        name: 'Tạo tài khoản',
+        url: '/buttons/dropdowns',
+        icon: 'icon-cursor'
+      }
+    ]
   },
   {
     name: 'Quản lý quyền',

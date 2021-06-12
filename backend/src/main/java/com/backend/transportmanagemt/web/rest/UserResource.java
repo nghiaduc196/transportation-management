@@ -5,6 +5,7 @@ import com.backend.transportmanagemt.domain.User;
 import com.backend.transportmanagemt.repository.UserRepository;
 import com.backend.transportmanagemt.security.AuthoritiesConstants;
 import com.backend.transportmanagemt.service.MailService;
+import com.backend.transportmanagemt.service.dto.UserResponseDTO;
 import org.springframework.data.domain.Sort;
 import java.util.Collections;
 import com.backend.transportmanagemt.service.UserService;
@@ -146,12 +147,12 @@ public class UserResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all users.
      */
     @GetMapping("/users")
-    public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable) {
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers(Pageable pageable) {
         if (!onlyContainsAllowedProperties(pageable)) {
             return ResponseEntity.badRequest().build();
         }
 
-        final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
+        final Page<UserResponseDTO> page = userService.getAllUsers(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import { navItems } from '../../_nav';
 import {AccountService} from '../../core/services/account.service';
+import {LoginService} from '../../core/services/login.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +12,9 @@ export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
   account: any;
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService,
+              private loginService: LoginService,
+              private router: Router) {
   }
   toggleMinimize(e) {
     this.sidebarMinimized = e;
@@ -30,5 +34,18 @@ export class DefaultLayoutComponent implements OnInit {
           return menu;
         });
     });
+  }
+
+  isAuthenticated() {
+    return this.accountService.isAuthenticated();
+  }
+
+  getImageUrl() {
+    return this.isAuthenticated() ? this.accountService.getImageUrl() : null;
+  }
+
+  logout() {
+    this.loginService.logout(true);
+    this.router.navigate(['/login']);
   }
 }

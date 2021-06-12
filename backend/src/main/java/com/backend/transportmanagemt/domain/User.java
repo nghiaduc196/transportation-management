@@ -93,6 +93,30 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "province_code", referencedColumnName = "code")
+    private Province province;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "district_code", referencedColumnName = "code")
+    private District district;
+
+    @ManyToOne
+    @JoinColumn(name = "ward_code", referencedColumnName = "code")
+    private Ward ward;
+
+    @Column(name = "fcm_token")
+    private String fcmToken;
+
+    @ManyToOne
+    @JoinColumn(name = "position_id",referencedColumnName = "id")
+    private Position position;
+
+    @Column(name = "phone_number", length = 50)
+    private String phoneNumber;
+
 
     public Long getId() {
         return id;
@@ -197,6 +221,58 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
+    }
+
+    public Ward getWard() {
+        return ward;
+    }
+
+    public void setWard(Ward ward) {
+        this.ward = ward;
+    }
+
+    public String getFcmToken() {
+        return fcmToken;
+    }
+
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @Override

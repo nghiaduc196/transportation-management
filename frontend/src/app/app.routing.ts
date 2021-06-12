@@ -48,7 +48,7 @@ export const routes: Routes = [
     component: DefaultLayoutComponent,
     canActivate: [UserRouteAccessService],
     data: {
-      title: 'Home'
+      title: 'Trang chủ'
     },
     children: [
       {

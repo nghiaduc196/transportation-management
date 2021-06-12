@@ -11,7 +11,7 @@
                         <th scope="col">STT</th>
                         <th scope="col">Tên người dùng</th>
                         <th scope="col">Trạng thái</th>
-                        <th scope="col">Nhóm</th>
+                        <th scope="col">Vị trí làm việc</th>
                         <th scope="col">Ngày tạo <a style="padding: 0 5px" (click)="sortByDate()"><i
                                 [ngClass]="(sortDesc)?'pi pi-sort-amount-up':'pi pi-sort-amount-down'"></i></a></th>
                         <th scope="col">Người tạo</th>
@@ -23,7 +23,7 @@
                     <tbody>
                     <tr *ngFor="let user of sortedData; let i = index">
                         <th scope="row">{{i + 1}}</th>
-                        <td>{{user.fullName}}</td>
+                        <td>{{user.firstName}}  {{user.lastName}}</td>
                         <td *ngIf="!user.activated"><span class="badge rounded-pill bg-danger p-2">Không Hoạt động</span></td>
                         <td *ngIf="user.activated"><span class="badge rounded-pill bg-success p-2">Hoạt động</span></td>
                         <td>
@@ -36,15 +36,6 @@
                         <td>{{user.phoneNumber ? user.phoneNumber : 'Chưa có số điện thoại'}}</td>
                         <td>{{user.email ? user.email : 'Chưa có email'}}</td>
                         <td class="overflow-hidden">
-<!--                            <a [routerLink]="['detail', user.login]">-->
-<!--                                <i class="pi pi-user"></i>-->
-<!--                            </a>-->
-<!--                            <a class="center-icon" [routerLink]="['update', user.login]">-->
-<!--                                <i class="pi pi-user-edit"></i>-->
-<!--                            </a>-->
-<!--                            <a (click)="confirm()">-->
-<!--                                <i class="pi pi-user-minus"></i>-->
-<!--                            </a>-->
                           <div ngbDropdown container="body">
                             <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle><i
                               class="fa fa-angle-double-down"></i></button>
@@ -53,7 +44,7 @@
                                 class="fa fa-eye"></i> Xem
                               </button>
                               <button ngbDropdownItem class="btn btn-warning" [routerLink]="['update', user.login]"><i class="fa fa-edit"></i> Sửa</button>
-                              <button ngbDropdownItem class="btn btn-danger" (click)="confirm(user?.id,user?.login,user?.activated)"><i class="fa fa-trash"></i> Hoạt động
+                              <button ngbDropdownItem class="btn btn-danger"><i class="fa fa-trash"></i> Hoạt động
                               </button>
                             </div>
                           </div>
@@ -67,4 +58,3 @@
         </div>
     </div>
 </div>
-<p-confirmDialog acceptLabel="Xác nhận" rejectLabel="Hủy bỏ" [baseZIndex]="10000"></p-confirmDialog>
