@@ -6,7 +6,7 @@ networks:
 
 services:
   backend:
-    image: transportmanagement
+    image: backend
     restart: always
     volumes:
       - ~/volumes/transportmanagement/data:/usr/local/transport/data
