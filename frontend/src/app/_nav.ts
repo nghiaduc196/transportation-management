@@ -48,6 +48,7 @@ export const navItems: NavData[] = [
   {
     name: 'Quản lý tài khoản',
     icon: 'icon-drop',
+    url: '/user',
     authorities: [ROLE.ADMIN],
     children: [
       {
