@@ -26,7 +26,7 @@ public class PositionService {
 
     public Position create(PositionRequestDTO requestDTO) {
         // Kiểm tra trùng tên
-        Position checkPositionName = positionRepository.findTopByName(requestDTO.getName().replaceAll("\\s\\s+", " ").trim()).orElse(null);
+        Position checkPositionName = positionRepository.findTopByNameAndStatusNotLike(requestDTO.getName().replaceAll("\\s\\s+", " ").trim(), CommonStatus.DELETED).orElse(null);
         if (checkPositionName != null) {
             throw new BadRequestAlertException("Duplicate name position", "Position", "duplicate");
         }
@@ -47,8 +47,14 @@ public class PositionService {
         return positionRepository.findById(id);
     }
 
-    public void delete(Long id) {
-        positionRepository.deleteById(id);
+    public Optional<Position> delete(Long id) {
+        return Optional.of(positionRepository.findById(id))
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .map(position -> {
+                position.setStatus(CommonStatus.DELETED);
+                return position;
+            });
     }
 
     public Optional<Position> update(PositionRequestDTO requestDTO) {
@@ -56,7 +62,7 @@ public class PositionService {
             .filter(Optional::isPresent)
             .map(Optional::get)
             .map(position -> {
-                Position checkPositionName = positionRepository.findTopByName(requestDTO.getName().replaceAll("\\s\\s+", " ").trim()).orElse(null);
+                Position checkPositionName = positionRepository.findTopByNameAndStatusNotLike(requestDTO.getName().replaceAll("\\s\\s+", " ").trim(), CommonStatus.DELETED).orElse(null);
                 if (checkPositionName != null) {
                     throw new BadRequestAlertException("Duplicate name position", "Position", "duplicate");
                 }

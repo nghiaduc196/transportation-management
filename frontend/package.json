@@ -55,6 +55,7 @@
     "core-js": "^3.9.1",
     "flag-icon-css": "^3.5.0",
     "font-awesome": "^4.7.0",
+    "lodash": "^4.17.21",
     "ng-jhipster": "^0.16.0",
     "ng2-charts": "^2.4.2",
     "ngx-bootstrap": "^6.2.0",

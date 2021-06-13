@@ -62,10 +62,12 @@ public class PositionResource {
 
     @PutMapping("/position")
     @PreAuthorize("hasAnyAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public ResponseEntity<PositionResponseDTO> update(PositionRequestDTO requestDTO) {
+    public ResponseEntity<PositionResponseDTO> update(@RequestBody PositionRequestDTO requestDTO) {
         log.debug("REST request update: {}", requestDTO.getId());
-        Optional<Position> check = positionService.findById(requestDTO.getId());
-        if (!check.isPresent()) {
+        Position check = positionService.findById(requestDTO.getId()).orElse(null);
+        log.debug("RESPONSE request update: {}", check);
+
+        if (check == null) {
             throw new BadRequestAlertException("ID doesn't exists!", "PositionManagement", "idnotexists");
         }
         Optional<PositionResponseDTO> update = positionService.update(requestDTO).map(PositionResponseDTO::new);

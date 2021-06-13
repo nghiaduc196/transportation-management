@@ -46,7 +46,6 @@ export class UserListComponent implements OnInit {
         };
         this.userService.filterUser(param).subscribe(res => {
             this.sortedData = res.body;
-            console.log(this.sortedData);
             this.totalData = res.headers.get('X-Total-Count');
         });
     }

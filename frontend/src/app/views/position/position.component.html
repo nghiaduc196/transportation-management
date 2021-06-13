@@ -1,1 +1,73 @@
-<p>position works!</p>
+<div class="animated fadeIn">
+  <p-toast [baseZIndex]="1000" [style]="{width: 'auto'}"></p-toast>
+  <div class="card">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i>
+      <h5 class="card-header-text d-inline-block">Danh sách vị trí công việc</h5>
+      <button  class="btn btn-success float-right" (click)="openDialog('CREATE')">Thêm mới vị trí</button>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+          <tr style="white-space: nowrap">
+            <th scope="col">STT</th>
+            <th scope="col">Vị trí</th>
+            <th scope="col">Trạng thái</th>
+            <th scope="col">Ngày tạo</th>
+            <th scope="col">Người tạo</th>
+            <th scope="col">#</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let position of sortedData; let i = index">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{position?.name}}</td>
+            <td *ngIf="position.status === 'ENABLE'"><span class=" badge rounded-pill bg-success p-2">Hoạt động</span></td>
+            <td *ngIf="position.status === 'DISABLE'"><span class="badge rounded-pill bg-danger p-2">Không Hoạt động</span></td>
+            <td>{{position.createdDate | date:'dd/MM/yyyy, h:mm a'}}</td>
+            <td>{{position.createdBy}}</td>
+            <td class="overflow-hidden">
+              <div ngbDropdown container="body">
+                <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle><i class="fa fa-angle-double-down"></i></button>
+                <div ngbDropdownMenu>
+                  <button ngbDropdownItem (click)="openEdit(position)"><i class="fa fa-edit"></i>Sửa</button>
+                  <button ngbDropdownItem (click)="delete(position)"><i class="fa fa-trash"></i>Xóa</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="sortedData.length === 0">
+            <th colspan="7" rowspan="1" class="text-center"> Không có danh sách </th>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <p-paginator [rows]="10" [totalRecords]="totalData" [rowsPerPageOptions]="pageSizeOption"
+                   (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+  </div>
+</div>
+
+<p-dialog [(visible)]="dialogCreate" [draggable]="false" [resizable]="false" [positionTop]="50"
+          [style]="{width: 'auto'}" [baseZIndex]="10000" [modal]="true" [blockScroll]="true">
+  <ng-template pTemplate="header">
+    <h4 *ngIf="type === 'CREATE'">Tạo mới vị trí làm việc</h4>
+    <h4 *ngIf="type === 'UPDATE'">Cập nhật vị trí làm việc</h4>
+  </ng-template>
+  <div class="col-md-12 mt-3">
+    <div [formGroup]="requestDTO">
+        <input style="width: 250px" type="text" formControlName="name" placeholder="Nhập vị trí mới" pInputText
+               [class.is-invalid]="requestDTO.controls.name.invalid && (requestDTO.controls.name.dirty || requestDTO.controls.name.touched)">
+    </div>
+    <small class="p-error" *ngIf="(requestDTO.controls.name.invalid && (requestDTO.controls.name.dirty || requestDTO.controls.name.touched)) &&requestDTO.controls.name.errors?.required">Vị trí không được để trống</small>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple type="button" label="Hủy" class="p-button-danger" (click)="close()"></button>
+    <button *ngIf="type === 'CREATE'" pButton pRipple type="button" label="Tạo mới" (click)="create()"></button>
+    <button *ngIf="type === 'UPDATE'" pButton pRipple type="button" label="Cập nhật" (click)="create()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: 'auto'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" acceptLabel="Đồng ý" rejectLabel="Hủy"></p-confirmDialog>
+

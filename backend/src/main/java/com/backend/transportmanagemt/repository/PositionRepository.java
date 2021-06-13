@@ -9,12 +9,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface PositionRepository extends JpaRepository<Position, Long> {
 
-    Optional<Position> findTopByName(@Param("name") String name);
+    Optional<Position> findTopByNameAndStatusNotLike(@Param("name") String name, @Param("status") CommonStatus status);
 
     @Query(value = "SELECT p FROM Position p WHERE 1=1 " +
         "AND (:status IS NULL OR p.status <> :status) " +
@@ -22,4 +23,6 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
     Page<Position> filter(@Param("name") String name,
                           @Param("status") CommonStatus status,
                           Pageable pageable);
+
+    List<Position> getAllByStatus(@Param("status") CommonStatus status);
 }
