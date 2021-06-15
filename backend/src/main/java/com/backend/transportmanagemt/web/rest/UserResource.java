@@ -5,6 +5,7 @@ import com.backend.transportmanagemt.domain.User;
 import com.backend.transportmanagemt.repository.UserRepository;
 import com.backend.transportmanagemt.security.AuthoritiesConstants;
 import com.backend.transportmanagemt.service.MailService;
+import com.backend.transportmanagemt.service.dto.UserRequestDTO;
 import com.backend.transportmanagemt.service.dto.UserResponseDTO;
 import org.springframework.data.domain.Sort;
 import java.util.Collections;
@@ -95,7 +96,7 @@ public class UserResource {
      */
     @PostMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDTO) throws URISyntaxException {
+    public ResponseEntity<User> createUser(@Valid @RequestBody UserRequestDTO userDTO) throws URISyntaxException {
         log.debug("REST request to save User : {}", userDTO);
 
         if (userDTO.getId() != null) {
@@ -103,11 +104,8 @@ public class UserResource {
             // Lowercase the user login before comparing with database
         } else if (userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).isPresent()) {
             throw new LoginAlreadyUsedException();
-        } else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
-            throw new EmailAlreadyUsedException();
-        } else {
+        }  else {
             User newUser = userService.createUser(userDTO);
-            mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
                 .headers(HeaderUtil.createAlert(applicationName,  "A user is created with identifier " + newUser.getLogin(), newUser.getLogin()))
                 .body(newUser);

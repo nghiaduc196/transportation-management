@@ -82,4 +82,16 @@ public class PositionResource {
         positionService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createAlert(applicationName, id.toString(), "Success")).build();
     }
+
+    @PutMapping("/position/update-status")
+    @PreAuthorize("hasAnyAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public ResponseEntity<PositionResponseDTO> changeStatus(@RequestBody PositionRequestDTO requestDTO) {
+        log.debug("REST request change status: {}", requestDTO.getId());
+        Optional<Position> check = positionService.findById(requestDTO.getId());
+        if (!check.isPresent()) {
+            throw new BadRequestAlertException("ID doesn't exists!", "PositionManagement", "idnotexists");
+        }
+        Optional<PositionResponseDTO> update = positionService.changeStatus(requestDTO).map(PositionResponseDTO::new);
+        return ResponseUtil.wrapOrNotFound(update, HeaderUtil.createAlert(applicationName, update.get().getId().toString(), "Success"));
+    }
 }

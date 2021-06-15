@@ -71,4 +71,14 @@ public class PositionService {
                 return position;
             });
     }
+
+    public Optional<Position> changeStatus(PositionRequestDTO requestDTO) {
+        return Optional.of(positionRepository.findById(requestDTO.getId()))
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .map(position -> {
+                position.setStatus(requestDTO.getStatus());
+                return position;
+            });
+    }
 }

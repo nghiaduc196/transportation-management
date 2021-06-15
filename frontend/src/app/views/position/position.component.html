@@ -23,8 +23,8 @@
           <tr *ngFor="let position of sortedData; let i = index">
             <th scope="row">{{i + 1}}</th>
             <td>{{position?.name}}</td>
-            <td *ngIf="position.status === 'ENABLE'"><span class=" badge rounded-pill bg-success p-2">Hoạt động</span></td>
-            <td *ngIf="position.status === 'DISABLE'"><span class="badge rounded-pill bg-danger p-2">Không Hoạt động</span></td>
+            <td *ngIf="position.status === 'ENABLE'"><button class="button-none-background" (click)="changeStatus(position, 'DISABLE')"><span class=" badge rounded-pill bg-success p-2">Hoạt động</span></button></td>
+            <td *ngIf="position.status === 'DISABLE'"><button class="button-none-background" (click)="changeStatus(position, 'ENABLE')"><span class="badge rounded-pill bg-danger p-2">Không Hoạt động</span></button></td>
             <td>{{position.createdDate | date:'dd/MM/yyyy, h:mm a'}}</td>
             <td>{{position.createdBy}}</td>
             <td class="overflow-hidden">

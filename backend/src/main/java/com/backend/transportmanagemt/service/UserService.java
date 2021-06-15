@@ -9,7 +9,9 @@ import com.backend.transportmanagemt.security.AuthoritiesConstants;
 import com.backend.transportmanagemt.security.SecurityUtils;
 import com.backend.transportmanagemt.service.dto.UserDTO;
 
+import com.backend.transportmanagemt.service.dto.UserRequestDTO;
 import com.backend.transportmanagemt.service.dto.UserResponseDTO;
+import com.backend.transportmanagemt.web.rest.errors.LoginAlreadyUsedException;
 import io.github.jhipster.security.RandomUtil;
 
 import org.slf4j.Logger;
@@ -136,21 +138,20 @@ public class UserService {
         return true;
     }
 
-    public User createUser(UserDTO userDTO) {
+    public User createUser(UserRequestDTO userDTO) {
         User user = new User();
-        user.setLogin(userDTO.getLogin().toLowerCase());
+        User check = userRepository.findOneByLogin(userDTO.getLogin().toLowerCase().replaceAll("\\s\\s+", " ").trim()).orElse(null);
+        if (check != null) {
+            throw new LoginAlreadyUsedException();
+        }
+        user.setLogin(userDTO.getLogin().toLowerCase().replaceAll("\\s\\s+", " ").trim());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         if (userDTO.getEmail() != null) {
             user.setEmail(userDTO.getEmail().toLowerCase());
         }
-        user.setImageUrl(userDTO.getImageUrl());
-        if (userDTO.getLangKey() == null) {
-            user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
-        } else {
-            user.setLangKey(userDTO.getLangKey());
-        }
-        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
+        user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
+        String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
         user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());

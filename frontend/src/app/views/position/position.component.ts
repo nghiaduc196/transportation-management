@@ -130,4 +130,37 @@ export class PositionComponent implements OnInit {
     });
   }
 
+  changeStatus(data: any, status: any) {
+    let text = '';
+    if (status === 'ENABLE') {
+      text = 'Kích hoạt vị trí';
+    } else {
+      text = 'Tắt vị trí';
+    }
+    this.requestDTO.controls.id.setValue(data.id);
+    this.requestDTO.controls.status.setValue(status);
+    this.confirmationService.confirm({
+      message: 'Bạn muốn thay đổi trạng thái vị trí ' + data.name + ' ?' ,
+      header: text ,
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.positionService.changeStatus(this.requestDTO.value).subscribe(res => {
+          data.status = 'DISABLE';
+          this.messageService.add({severity: 'success', summary: 'Thành công', detail: 'Thay đổi thành công'});
+          this.fetch();
+        }, err => {
+          this.messageService.add({severity: 'error', summary: 'Lỗi', detail: 'Hệ thống lỗi. Vui lòng thử lại sau'});
+        });
+      },
+      reject: (type) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            break;
+          case ConfirmEventType.CANCEL:
+            break;
+        }
+      }
+    });
+  }
+
 }

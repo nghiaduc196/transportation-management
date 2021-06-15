@@ -9,6 +9,7 @@ import com.backend.transportmanagemt.security.AuthoritiesConstants;
 import com.backend.transportmanagemt.service.UserService;
 import com.backend.transportmanagemt.service.dto.PasswordChangeDTO;
 import com.backend.transportmanagemt.service.dto.UserDTO;
+import com.backend.transportmanagemt.service.dto.UserRequestDTO;
 import com.backend.transportmanagemt.web.rest.vm.KeyAndPasswordVM;
 import com.backend.transportmanagemt.web.rest.vm.ManagedUserVM;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -82,13 +83,12 @@ public class AccountResourceIT {
         Set<String> authorities = new HashSet<>();
         authorities.add(AuthoritiesConstants.ADMIN);
 
-        UserDTO user = new UserDTO();
+        UserRequestDTO user = new UserRequestDTO();
         user.setLogin(TEST_USER_LOGIN);
         user.setFirstName("john");
         user.setLastName("doe");
+        user.setPassword("doe");
         user.setEmail("john.doe@jhipster.com");
-        user.setImageUrl("http://placehold.it/50x50");
-        user.setLangKey("en");
         user.setAuthorities(authorities);
         userService.createUser(user);
 
