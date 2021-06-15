@@ -88,14 +88,12 @@
                         <tr>
                           <th>STT</th>
                           <th>Tên</th>
-                          <th>Mô tả</th>
                         </tr>
                       </ng-template>
                       <ng-template pTemplate="body" let-authority let-rowIndex="rowIndex">
                         <tr>
                           <td>{{rowIndex + 1}}</td>
-                          <td>{{authority.name}}</td>
-                          <td>{{authority.description}}</td>
+                          <td>{{authority}}</td>
                         </tr>
                       </ng-template>
                     </p-table>

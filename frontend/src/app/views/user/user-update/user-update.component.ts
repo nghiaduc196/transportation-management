@@ -96,15 +96,15 @@ export class UserUpdateComponent implements OnInit {
   }
 
   inSelected(authority) {
-    return this.authoritiesSelected.map(a => a.name).indexOf(authority.name) > -1;
+    return this.authoritiesSelected.map(a => a).indexOf(authority.name) > -1;
   }
 
   choose(authority) {
-    this.authoritiesSelected.push(authority);
+    this.authoritiesSelected.push(authority.name);
   }
 
   unChoose(authority) {
-    this.authoritiesSelected = this.authoritiesSelected.filter(a => a.name !== authority.name);
+    this.authoritiesSelected = this.authoritiesSelected.filter(a => a !== authority.name);
   }
 
   create() {
