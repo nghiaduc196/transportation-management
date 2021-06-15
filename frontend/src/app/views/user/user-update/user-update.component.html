@@ -87,10 +87,7 @@
                       <ng-template pTemplate="header">
                         <tr>
                           <th>STT</th>
-                          <th pSortableColumn="name">
-                            Tên
-                            <p-sortIcon field="name"></p-sortIcon>
-                          </th>
+                          <th>Tên</th>
                           <th>Mô tả</th>
                         </tr>
                       </ng-template>
@@ -117,10 +114,7 @@
                 <ng-template pTemplate="header">
                   <tr>
                     <th>STT</th>
-                    <th pSortableColumn="name">
-                      Tên
-                      <p-sortIcon field="name"></p-sortIcon>
-                    </th>
+                    <th>Tên</th>
                     <th>Mô tả</th>
                     <th></th>
                   </tr>
@@ -154,7 +148,7 @@
                             class="p-button-raised p-button-secondary"></button>
                 </div>
                 <div class="col-auto">
-                    <button pButton pRipple (click)="saveUser()" icon="pi pi-pencil" type="button" label="Lưu lại"
+                    <button pButton pRipple (click)="create()" icon="pi pi-pencil" type="button" label="Lưu lại"
                             class="p-button-raised p-button-success"></button>
                 </div>
             </div>

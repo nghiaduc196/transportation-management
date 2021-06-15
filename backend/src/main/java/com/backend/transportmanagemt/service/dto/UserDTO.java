@@ -2,8 +2,7 @@ package com.backend.transportmanagemt.service.dto;
 
 import com.backend.transportmanagemt.config.Constants;
 
-import com.backend.transportmanagemt.domain.Authority;
-import com.backend.transportmanagemt.domain.User;
+import com.backend.transportmanagemt.domain.*;
 
 import javax.validation.constraints.*;
 import java.time.Instant;
@@ -50,6 +49,13 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private Position position;
+    private Province province;
+    private District district;
+    private Ward ward;
+    private String phone;
+    private String address;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -70,6 +76,12 @@ public class UserDTO {
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
+        this.position = user.getPosition();
+        this.province = user.getProvince();
+        this.district = user.getDistrict();
+        this.ward = user.getWard();
+        this.phone = user.getPhoneNumber();
+        this.address = user.getAddress();
     }
 
     public Long getId() {
@@ -174,6 +186,54 @@ public class UserDTO {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
+    }
+
+    public Ward getWard() {
+        return ward;
+    }
+
+    public void setWard(Ward ward) {
+        this.ward = ward;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     // prettier-ignore

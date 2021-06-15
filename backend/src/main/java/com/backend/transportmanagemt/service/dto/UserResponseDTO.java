@@ -24,6 +24,8 @@ public class UserResponseDTO {
     private String address;
     private Set<String> authorities;
 
+    public UserResponseDTO() {
+    }
 
     public UserResponseDTO(User user) {
         this.id = user.getId();

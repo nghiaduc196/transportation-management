@@ -38,10 +38,10 @@
                             <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle><i
                               class="fa fa-angle-double-down"></i></button>
                             <div ngbDropdownMenu>
-                              <button ngbDropdownItem class="btn btn-info" [routerLink]="['detail', user.login]"><i
+                              <button ngbDropdownItem class="btn btn-info" [routerLink]="['/detail', user.login]"><i
                                 class="fa fa-eye"></i> Xem
                               </button>
-                              <button ngbDropdownItem class="btn btn-warning" [routerLink]="['update', user.login]"><i class="fa fa-edit"></i> Sửa</button>
+                              <button ngbDropdownItem class="btn btn-warning" [routerLink]="['/user/update', user.login]"><i class="fa fa-edit"></i> Sửa</button>
                               <button ngbDropdownItem class="btn btn-danger"><i class="fa fa-trash"></i> Hoạt động
                               </button>
                             </div>

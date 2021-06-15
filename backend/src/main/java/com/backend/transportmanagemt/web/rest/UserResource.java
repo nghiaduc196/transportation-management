@@ -124,7 +124,7 @@ public class UserResource {
      */
     @PutMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserRequestDTO userDTO) {
         log.debug("REST request to update User : {}", userDTO);
         Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
@@ -197,6 +197,7 @@ public class UserResource {
             userService.getUserWithAuthoritiesByLogin(login)
                 .map(UserDTO::new));
     }
+
 
     /**
      * {@code DELETE /users/:login} : delete the "login" User.

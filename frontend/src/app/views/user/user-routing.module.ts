@@ -1,11 +1,27 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {Injectable, NgModule} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterModule, Routes} from '@angular/router';
 import {UserListComponent} from './user-list/user-list.component';
 import {UserUpdateComponent} from './user-update/user-update.component';
+import {UserService} from '../../core/services/user.service';
+import {Observable, of} from 'rxjs';
+
+@Injectable({ providedIn: 'root' })
+export class UserManagementResolve implements Resolve<any> {
+  user: any;
+  constructor(private service: UserService) {}
+
+  resolve(route: ActivatedRouteSnapshot): Observable<any> {
+    const id = route.params['login'];
+    if (id) {
+      return this.service.find(id);
+    }
+    return this.user();
+  }
+}
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'list',
     component: UserListComponent,
     data: {
       title: 'Danh sách người dùng'
@@ -19,10 +35,13 @@ const routes: Routes = [
     }
   },
   {
-    path: 'update',
+    path: 'update/:login',
     component: UserUpdateComponent,
+    resolve: {
+      user: UserManagementResolve,
+    },
     data: {
-      title: 'Thêm mới người dùng'
+      title: 'Cập nhật thông tin người dùng'
     }
   }
 ];

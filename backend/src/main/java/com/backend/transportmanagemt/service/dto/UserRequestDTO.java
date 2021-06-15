@@ -1,4 +1,6 @@
 package com.backend.transportmanagemt.service.dto;
+import com.backend.transportmanagemt.domain.Authority;
+
 import java.util.Set;
 
 public class UserRequestDTO {
@@ -9,13 +11,14 @@ public class UserRequestDTO {
     private String password;
     private String phone;
     private String email;
-    private Set<String> authorities;
+    private Set<Authority> authorities;
     private Long positionId;
     private String provinceCode;
     private String wardCode;
     private String districtCode;
     private String address;
     private String fcmToken;
+    private Boolean activated;
 
     public UserRequestDTO() {
     }
@@ -68,13 +71,6 @@ public class UserRequestDTO {
         this.email = email;
     }
 
-    public Set<String> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<String> authorities) {
-        this.authorities = authorities;
-    }
 
     public Long getPositionId() {
         return positionId;
@@ -130,5 +126,21 @@ public class UserRequestDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getActivated() {
+        return activated;
+    }
+
+    public void setActivated(Boolean activated) {
+        this.activated = activated;
+    }
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
     }
 }

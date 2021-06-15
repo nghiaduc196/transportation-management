@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,7 @@ export class PositionService {
     return this.http.get<any>(this.SERVER_API_URL + 'position', {params: param, observe: 'response'});
   }
 
-  getListActive(): Observable<HttpResponse<any>> {
+  getListActive(param?): Observable<HttpResponse<any>> {
     return this.http.get<any>(this.SERVER_API_URL + 'position', {params: param, observe: 'response'});
   }
 

@@ -53,7 +53,7 @@ export const navItems: NavData[] = [
     children: [
       {
         name: 'Danh sách tài khoản',
-        url: '/user',
+        url: '/user/list',
         icon: 'icon-cursor'
       },
       {

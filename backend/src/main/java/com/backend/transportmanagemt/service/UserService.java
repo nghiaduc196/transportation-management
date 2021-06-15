@@ -2,6 +2,7 @@ package com.backend.transportmanagemt.service;
 
 import com.backend.transportmanagemt.config.Constants;
 import com.backend.transportmanagemt.domain.Authority;
+import com.backend.transportmanagemt.domain.Position;
 import com.backend.transportmanagemt.domain.User;
 import com.backend.transportmanagemt.repository.AuthorityRepository;
 import com.backend.transportmanagemt.repository.UserRepository;
@@ -16,6 +17,7 @@ import io.github.jhipster.security.RandomUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -46,6 +48,9 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
+
+    @Autowired
+    PositionService positionService;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
         this.userRepository = userRepository;
@@ -154,15 +159,13 @@ public class UserService {
         user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
         String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
         user.setPassword(encryptedPassword);
+        Position position = positionService.findById(userDTO.getPositionId()).orElse(null);
+        user.setPosition(position);
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
         user.setActivated(true);
         if (userDTO.getAuthorities() != null) {
-            Set<Authority> authorities = userDTO.getAuthorities().stream()
-                .map(authorityRepository::findById)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toSet());
+            Set<Authority> authorities = new HashSet<>(userDTO.getAuthorities());
             user.setAuthorities(authorities);
         }
         userRepository.save(user);
@@ -177,7 +180,7 @@ public class UserService {
      * @param userDTO user to update.
      * @return updated user.
      */
-    public Optional<UserDTO> updateUser(UserDTO userDTO) {
+    public Optional<UserDTO> updateUser(UserRequestDTO userDTO) {
         return Optional.of(userRepository
             .findById(userDTO.getId()))
             .filter(Optional::isPresent)
@@ -190,16 +193,14 @@ public class UserService {
                 if (userDTO.getEmail() != null) {
                     user.setEmail(userDTO.getEmail().toLowerCase());
                 }
-                user.setImageUrl(userDTO.getImageUrl());
-                user.setActivated(userDTO.isActivated());
-                user.setLangKey(userDTO.getLangKey());
+//                user.setImageUrl(userDTO.getImageUrl());
+                user.setActivated(userDTO.getActivated());
+//                user.setLangKey(userDTO.getLangKey());
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
-                userDTO.getAuthorities().stream()
-                    .map(authorityRepository::findById)
-                    .filter(Optional::isPresent)
-                    .map(Optional::get)
-                    .forEach(managedAuthorities::add);
+                Set<Authority> authorities = new HashSet<>(userDTO.getAuthorities());
+                user.setAuthorities(authorities);
+
                 this.clearUserCaches(user);
                 log.debug("Changed Information for User: {}", user);
                 return user;

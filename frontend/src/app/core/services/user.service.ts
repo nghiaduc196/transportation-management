@@ -8,59 +8,53 @@ import {environment} from '../../../environments/environment';
     providedIn: 'root'
 })
 export class UserService {
-    private SERVER_API_URL = environment.api;
+  private SERVER_API_URL = environment.api;
 
-    constructor(private http: HttpClient) {
-    }
+  constructor(private http: HttpClient) {
+  }
 
-    getAll(): Observable<HttpResponse<User>> {
-        return this.http.get<User>(this.SERVER_API_URL + 'users', {observe: 'response'});
-    }
+  getAll(): Observable<HttpResponse<User>> {
+    return this.http.get<User>(this.SERVER_API_URL + 'users', {observe: 'response'});
+  }
 
-    filterUser(param?): Observable<HttpResponse<any>> {
-        return this.http.get<any>(this.SERVER_API_URL + 'users', {
-            observe: 'response',
-            params: param
-        });
-    }
+  filterUser(param?): Observable<HttpResponse<any>> {
+    return this.http.get<any>(this.SERVER_API_URL + 'users', {
+      observe: 'response',
+      params: param
+    });
+  }
 
-    getAuthorities(param?): Observable<HttpResponse<any>> {
-        return this.http.get<any>(this.SERVER_API_URL + 'users/authorities', {
-            observe: 'response',
-            params: param
-        });
-    }
+  getAuthorities(param?): Observable<HttpResponse<any>> {
+    return this.http.get<any>(this.SERVER_API_URL + 'users/authorities', {
+      observe: 'response',
+      params: param
+    });
+  }
 
-    getUserByLogin(login?): Observable<HttpResponse<any>> {
-        return this.http.get<any>(this.SERVER_API_URL + 'users/' + login, {
-            observe: 'response',
-        });
-    }
+  getUserByLogin(login?): Observable<HttpResponse<any>> {
+    return this.http.get<any>(this.SERVER_API_URL + 'users/' + login, {
+      observe: 'response',
+    });
+  }
 
-    // @ts-ignore
-    updatePro(id: any): Observable<any>{
-        return this.http.put<any>(this.SERVER_API_URL + 'update-information/user-pro/' + id, {observe: 'response'});
-    }
+  updateUser(user): Observable<HttpResponse<any>> {
+    return this.http.put<any>(this.SERVER_API_URL + 'users', user, {
+      observe: 'response'
+    });
+  }
 
-    updateNormal(id: any): Observable<any>{
-      return this.http.put<any>(this.SERVER_API_URL + 'update-information/user-normal/' + id, {observe: 'response'});
-    }
 
-    filterGroups(param?): Observable<HttpResponse<any>> {
-        return this.http.get<any>(this.SERVER_API_URL + 'groups', {
-            observe: 'response',
-            // params: param
-        });
-    }
+  create(user): Observable<any> {
+    return this.http.post<any>(this.SERVER_API_URL + 'users', user, {
+      observe: 'response'
+    });
+  }
 
-    updateFcmToken(token: any): Observable<any> {
-        const param = {fcmToken: token};
-        return this.http.post<any>(this.SERVER_API_URL + 'update-fcmtoken', {}, {observe: 'response', params: param});
-    }
+  update(user): Observable<any> {
+    return this.http.put<any>(this.SERVER_API_URL + 'users', user);
+  }
 
-    updateUser(user): Observable<HttpResponse<any>> {
-        return this.http.put<any>(this.SERVER_API_URL + 'users', user, {
-            observe: 'response'
-        });
-    }
+  find(login: string): Observable<any> {
+    return this.http.get<any>(`${this.SERVER_API_URL + 'users'}/${login}`);
+  }
 }

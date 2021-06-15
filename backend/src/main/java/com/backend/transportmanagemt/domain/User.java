@@ -302,18 +302,29 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return 31;
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
         return "User{" +
-            "login='" + login + '\'' +
+            "id=" + id +
+            ", login='" + login + '\'' +
+            ", password='" + password + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
-            ", activated='" + activated + '\'' +
+            ", activated=" + activated +
             ", langKey='" + langKey + '\'' +
+            ", imageUrl='" + imageUrl + '\'' +
             ", activationKey='" + activationKey + '\'' +
-            "}";
+            ", resetKey='" + resetKey + '\'' +
+            ", resetDate=" + resetDate +
+            ", authorities=" + authorities +
+            ", province=" + province +
+            ", district=" + district +
+            ", ward=" + ward +
+            ", address='" + address + '\'' +
+            ", fcmToken='" + fcmToken + '\'' +
+            ", position=" + position +
+            ", phoneNumber='" + phoneNumber + '\'' +
+            '}';
     }
 }
