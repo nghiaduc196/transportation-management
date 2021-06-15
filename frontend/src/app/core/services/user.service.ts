@@ -24,8 +24,8 @@ export class UserService {
         });
     }
 
-    filterPermission(param?): Observable<HttpResponse<any>> {
-        return this.http.get<any>(this.SERVER_API_URL + 'permission', {
+    getAuthorities(param?): Observable<HttpResponse<any>> {
+        return this.http.get<any>(this.SERVER_API_URL + 'users/authorities', {
             observe: 'response',
             params: param
         });

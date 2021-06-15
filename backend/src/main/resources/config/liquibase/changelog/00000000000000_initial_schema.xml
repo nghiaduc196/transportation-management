@@ -48,6 +48,7 @@
             <column name="name" type="varchar(50)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="description" type="varchar(256)"/>
         </createTable>
 
         <createTable tableName="jhi_user_authority">

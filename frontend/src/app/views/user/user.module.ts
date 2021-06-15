@@ -11,6 +11,9 @@ import {ButtonModule} from 'primeng/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
+import {RippleModule} from 'primeng/ripple';
+import {TableModule} from 'primeng/table';
+import {NgSelectModule} from '@ng-select/ng-select';
 @NgModule({
   declarations: [UserListComponent, UserUpdateComponent],
   imports: [
@@ -24,7 +27,10 @@ import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     InputTextareaModule,
     ReactiveFormsModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    RippleModule,
+    TableModule,
+    NgSelectModule
   ]
 })
 export class UserModule { }

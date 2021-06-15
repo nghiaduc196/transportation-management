@@ -17,6 +17,10 @@ export class PositionService {
     return this.http.get<any>(this.SERVER_API_URL + 'position', {params: param, observe: 'response'});
   }
 
+  getListActive(): Observable<HttpResponse<any>> {
+    return this.http.get<any>(this.SERVER_API_URL + 'position', {params: param, observe: 'response'});
+  }
+
   create(body): Observable<any> {
     return this.http.post<any>(this.SERVER_API_URL + 'position', body, { observe: 'response' });
   }

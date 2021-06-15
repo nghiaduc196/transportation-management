@@ -47,6 +47,15 @@ public class PositionResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+//    @GetMapping("/position/enable")
+//    @PreAuthorize("hasAnyAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+//    public ResponseEntity<List<PositionResponseDTO>> getAllByStatusEnable(Pageable pageable) {
+//        log.debug("REST request to get position: {}", requestDTO);
+//        final Page<PositionResponseDTO> page = positionService.filter(requestDTO, pageable).map(PositionResponseDTO::new);
+//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+//        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+//    }
+
     @PostMapping("/position")
     @PreAuthorize("hasAnyAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<PositionResponseDTO> create(@RequestBody PositionRequestDTO requestDTO) throws URISyntaxException {

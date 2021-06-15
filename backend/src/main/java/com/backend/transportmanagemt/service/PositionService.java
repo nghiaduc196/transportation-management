@@ -40,6 +40,10 @@ public class PositionService {
         return positionRepository.filter(requestDTO.getName(), CommonStatus.DELETED, pageable);
     }
 
+    public Page<Position> getAllByStatusEnable(Pageable pageable) {
+        return positionRepository.getAllByStatus(CommonStatus.ENABLE, pageable);
+    }
+
     public Optional<Position> findById(Long id) {
         if (id == null) {
             return Optional.empty();

@@ -58,7 +58,7 @@ export const navItems: NavData[] = [
       },
       {
         name: 'Tạo tài khoản',
-        url: '#',
+        url: '/user/create',
         icon: 'icon-cursor'
       }
     ]

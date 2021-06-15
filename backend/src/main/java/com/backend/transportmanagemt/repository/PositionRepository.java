@@ -24,5 +24,5 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
                           @Param("status") CommonStatus status,
                           Pageable pageable);
 
-    List<Position> getAllByStatus(@Param("status") CommonStatus status);
+    Page<Position> getAllByStatus(@Param("status") CommonStatus status, Pageable pageable);
 }

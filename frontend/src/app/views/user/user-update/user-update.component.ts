@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../core/services/user.service';
 import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, Validators} from '@angular/forms';
-import {Location} from '@angular/common';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-user-update',
@@ -10,70 +10,66 @@ import {Location} from '@angular/common';
     styleUrls: ['./user-update.component.scss'],
 })
 export class UserUpdateComponent implements OnInit {
-    dataUser: any;
-    rawGroup: any;
-    editedGroup: any;
-    checked = false;
-    alreadyPro = false;
-    userForm = this.fb.group({
-        id: '',
-        login: '',
-        activated: [null, Validators.requiredTrue]
-    });
+  user: any;
+  requestDTO = this.fb.group({
+    id: [''],
+    login: ['', Validators.required],
+    password: ['', Validators.required],
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    activated: [''],
+    positionId: [null]
+  });
+  authoritiesSelected = [];
+  authorities = [];
+  totalRecords = 0;
+  pageSize = 10;
+  loading = false;
+  page = 0;
+  groupFilter = new FormControl('');
+  positions = [];
 
-    constructor(
-        private userService: UserService,
-        private route: ActivatedRoute,
-        private fb: FormBuilder,
-        private _location: Location) {
-    }
+  constructor(private userService: UserService,
+              private route: ActivatedRoute,
+              private fb: FormBuilder) {}
 
     ngOnInit(): void {
-        const login = this.route.snapshot.paramMap.get('login');
-        console.log(login);
-        this.getUserUpdate(login);
+      this.getListAuthorities();
+      this.groupFilter.valueChanges
+        .pipe(
+          debounceTime(200),
+          distinctUntilChanged(),
+          tap(() => (this.loading = true)),
+          tap(() => this.getListAuthorities())
+        ).subscribe();
     }
 
-    getUserUpdate(login?) {
-        this.userService.getUserByLogin(login).subscribe(res => {
-            this.dataUser = res.body;
-            console.log('getUserUpdate', this.dataUser);
-            this.userForm.controls['activated'].setValue(res.body.activated);
-            this.userForm.controls['id'].setValue(res.body.id);
-            this.userForm.controls['login'].setValue(res.body.login);
-            if (res.body.authorities[0] === 'ROLE_PRO') {
-              this.alreadyPro = true;
-            }
-            console.log('Form:', this.userForm.getRawValue());
-        });
-    }
-
-    saveUser(): void {
-        console.log('update user: ');
-        console.log('Form update:', this.userForm.getRawValue());
-        this.userService.updateUser(this.userForm.getRawValue()).subscribe(res => {
-            console.log(res);
-            this.backToPrevious();
-        });
-    }
-
-    fake(item: any): void {
-      console.log(item.checked);
-      console.log(this.userForm.controls.activated.value);
-    }
-
-    backToPrevious(): void {
-        this._location.back();
-    }
-
-    updatePro(): void {
-      this.userService.updatePro(this.userForm.controls.id.value).subscribe(() => {});
-      this.alreadyPro = true;
-    }
-
-    updateNormal(): void {
-      this.userService.updateNormal(this.userForm.controls.id.value).subscribe(() => {
+    getListAuthorities() {
+      const param = {
+        name: this.groupFilter.value,
+        page: this.page,
+        size: this.pageSize
+      };
+      this.userService.getAuthorities(param).subscribe(res => {
+        this.onSuccess(res.body, res.headers);
       });
-      this.alreadyPro = false;
     }
+
+  private onSuccess(data, headers) {
+    this.loading = false;
+    this.totalRecords = headers.get('X-Total-Count');
+    this.authorities = data;
+  }
+
+  inSelected(authority) {
+    return this.authoritiesSelected.map(p => p.name).indexOf(authority.name) > -1;
+  }
+
+  choose(authority) {
+    this.authoritiesSelected.push(authority);
+  }
+
+  unChoose(authority) {
+    this.authoritiesSelected = this.authoritiesSelected.filter(p => p.name !== authority.name);
+  }
 }

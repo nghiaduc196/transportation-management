@@ -1,94 +1,155 @@
 <div class="animated fadeIn">
     <div class="card">
         <div class="card-header">
-            Chỉnh sửa người dùng
+          Tạo mới người dùng
+<!--          {{user.id == null ? 'Tạo mới nhân viên' : 'Chỉnh sửa nhân viên #' + user.id}}-->
         </div>
         <div class="card-body">
-            <form [formGroup]="userForm">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info">Tên người dùng</span>
-                            </div>
-                            <input type="text" class="form-control"
-                                   value="{{dataUser?.fullName}}"
-                                   readonly>
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info">Người tạo</span>
-                            </div>
-                            <input type="text" class="form-control" value="{{dataUser?.createdBy}}" readonly>
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info">Ngày tạo</span>
-                            </div>
-                            <input type="text" class="form-control"
-                                   value="{{dataUser?.createdDate | date:'dd-MM-yyyy H:mm'}}" readonly>
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info">Trạng thái</span>
-                            </div>
-                            <div style="width: calc(100% - 130px)">
-                                <p-toggleButton formControlName="activated" onLabel="Hoạt động" (onChange)="fake($event)"
-                                                offLabel="Ngừng hoạt động" onIcon="pi pi-lock-open"
-                                                offIcon="pi pi-lock" [style]="{'width': '100%'}"></p-toggleButton>
-                            </div>
-                            <!--                        <input type="text" class="form-control"  readonly>-->
-                        </div>
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text text-info">Nâng cấp</span>
-                          </div>
-                          <button *ngIf="!alreadyPro" pButton pRipple (click)="updatePro()" type="button"
-                                  label="Nâng cấp kinh doanh chuyên nghiệp"
-                                  class="p-button-raised p-button-secondary"></button>
-                          <button *ngIf="alreadyPro" pButton pRipple (click)="updateNormal()" type="button"
-                                  label="Người dùng thường"
-                                  class="p-button-raised p-button-secondary"></button>
-                        </div>
+          <div class="row">
+            <div class="col-md-6">
+              <form class="needs-validation form-horizontal" [formGroup]="requestDTO">
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="login">Tài khoản</label>
+                  <div class="col-md-9">
+                    <input class="form-control" id="login" type="text" name="login" placeholder="Tài khoản"
+                           formControlName="login" [class.is-invalid]="requestDTO.controls.login.invalid && (requestDTO.controls.login.dirty || requestDTO.controls.login.touched)">
+                    <div class="invalid-feedback" *ngIf="requestDTO.controls.login.errors?.required">
+                      *Tài khoản không được để trống
                     </div>
-                    <div class="col-md-6">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info">Số điện thoại</span>
-                            </div>
-                            <input type="text" class="form-control"
-                                   value="{{dataUser?.phoneNumber ? dataUser.phoneNumber : 'Chưa có số điện thoại'}}"
-                                   readonly>
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info">Địa chỉ</span>
-                            </div>
-                            <input type="text" class="form-control"
-                                   value="{{dataUser?.province ? dataUser.district.name +', '+ dataUser.province.name : 'Chưa có địa chỉ'  }}"
-                                   readonly>
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info">Email</span>
-                            </div>
-                            <input type="text" class="form-control"
-                                   value="{{dataUser?.email ? dataUser?.email : 'Chưa có email2'}}" readonly>
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text text-info">Tên đăng nhập</span>
-                            </div>
-                            <input type="text" class="form-control" value="{{dataUser?.login}}" readonly>
-                        </div>
-                    </div>
+                  </div>
                 </div>
-            </form>
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="login">Mật Khẩu</label>
+                  <div class="col-md-9">
+                    <input class="form-control" id="password" type="password" name="password" placeholder="Mật khẩu" required
+                           formControlName="password" [class.is-invalid]="requestDTO.controls.password.invalid && (requestDTO.controls.password.dirty || requestDTO.controls.password.touched)">
+                    <div class="invalid-feedback" *ngIf="requestDTO.controls.password.errors?.required">
+                      *Mật khẩu không được để trống
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="firstName">Họ</label>
+                  <div class="col-md-9">
+                    <input class="form-control" id="firstName" type="text" name="firstName" placeholder="Họ" required
+                           formControlName="firstName" maxlength="50"  [class.is-invalid]="requestDTO.controls.firstName.invalid && (requestDTO.controls.firstName.dirty || requestDTO.controls.firstName.touched)">
+                    <div class="invalid-feedback" *ngIf="requestDTO.controls.firstName.errors?.required">
+                      *Họ không được để trống
+                    </div>
+                    <div class="invalid-feedback" *ngIf="requestDTO.controls.firstName.errors?.maxlength">
+                      *Họ không được dài hơn 50 ký tự
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="lastName">Tên</label>
+                  <div class="col-md-9">
+                    <input class="form-control" id="lastName" type="text" name="lastName" placeholder="Tên"
+                           formControlName="lastName" maxlength="50" required
+                           [class.is-invalid]="requestDTO.controls.lastName.invalid && (requestDTO.controls.lastName.dirty || requestDTO.controls.lastName.touched)">
+                    <div class="invalid-feedback" *ngIf="requestDTO.controls.lastName.errors?.required">
+                      *Tên không được để trống
+                    </div>
+                    <div class="invalid-feedback" *ngIf="requestDTO.controls.lastName.errors?.maxlength">
+                      *Tên không được dài hơn 50 ký tự
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label">Vị trí</label>
+                  <div class="col-md-9">
+                    <ng-select [items]="positions"
+                               bindLabel="name"
+                               bindValue="id"
+                               placeholder="Lựa chọn vị trí"
+                               formControlName="positionId">
+                    </ng-select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-md-9 offset-md-3">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="activated"
+                             formControlName="activated">
+                      <label class="custom-control-label" for="activated">Hoạt động</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12">
+                    <label>Danh sách quyền đã chọn</label>
+                    <p-table [value]="authoritiesSelected" [paginator]="true" [rows]="pageSize"
+                             [totalRecords]="authoritiesSelected.length"
+                             #authoritiesTable>
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th>STT</th>
+                          <th pSortableColumn="name">
+                            Tên
+                            <p-sortIcon field="name"></p-sortIcon>
+                          </th>
+                          <th>Mô tả</th>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-authority let-rowIndex="rowIndex">
+                        <tr>
+                          <td>{{rowIndex + 1}}</td>
+                          <td>{{authority.name}}</td>
+                          <td>{{authority.description}}</td>
+                        </tr>
+                      </ng-template>
+                    </p-table>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-6">
+              <label>Tìm kiếm quyền</label>
+              <div class="input-user mb-4">
+                <input class="form-control" placeholder="Tìm kiếm theo mô tả" type="text"
+                       [formControl]="groupFilter">
+              </div>
+              <p-table [value]="authorities" [paginator]="true" [rows]="pageSize" [totalRecords]="totalRecords"
+                       [lazy]="true"  [loading]="loading" #authoritiesTable>
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>STT</th>
+                    <th pSortableColumn="name">
+                      Tên
+                      <p-sortIcon field="name"></p-sortIcon>
+                    </th>
+                    <th>Mô tả</th>
+                    <th></th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-authority let-rowIndex="rowIndex">
+                  <tr>
+                    <td>{{rowIndex + 1}}</td>
+                    <td>{{authority.name}}</td>
+                    <td>{{authority?.description}}</td>
+                    <td class="text-center">
+                      <button class="btn btn-sm btn-primary" type="button" (click)="choose(authority)"
+                              *ngIf="!inSelected(authority)">
+                        <i class="cui-circle-check"></i> Chọn
+                      </button>
+                      <button class="btn btn-sm btn-danger" type="button" (click)="unChoose(authority)"
+                              *ngIf="inSelected(authority)">
+                        <i class="cui-circle-x"></i> Bỏ chọn
+                      </button>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
         </div>
         <div class="card-footer">
             <div class="row">
                 <div class="col-auto mr-auto">
-                    <button pButton pRipple (click)="backToPrevious()" icon="pi pi-chevron-left" type="button"
+                    <button pButton pRipple icon="pi pi-chevron-left" type="button"
                             label="Quay lại"
                             class="p-button-raised p-button-secondary"></button>
                 </div>
