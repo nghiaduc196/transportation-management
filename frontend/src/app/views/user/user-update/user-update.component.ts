@@ -26,6 +26,7 @@ export class UserUpdateComponent implements OnInit {
     authorities: [null]
   });
   authoritiesSelected = [];
+  authoritiesRequest = [];
   authorities = [];
   totalRecords = 0;
   pageSize = 10;
@@ -40,12 +41,12 @@ export class UserUpdateComponent implements OnInit {
               private positionService: PositionService,
               private messageService: MessageService,
               private router: Router) {
+    this.getDetailUser();
   }
 
   ngOnInit(): void {
     this.getListAuthorities();
     this.getListPositions();
-    this.getDetailUser();
     this.groupFilter.valueChanges
       .pipe(
         debounceTime(200),
@@ -58,10 +59,14 @@ export class UserUpdateComponent implements OnInit {
   getDetailUser() {
     this.route.data.subscribe(({ user }) => {
       if (user) {
+        this.user = user;
+        this.requestDTO.controls.id.setValue(user.id);
         this.requestDTO.controls.login.setValue(user.login);
-        // this.requestDTO.controls.password.setValue(user.)
-        // this.requestDTO.controls.positionId.setValue(user.)
+        this.requestDTO.controls.positionId.setValue(user.position.id);
         this.requestDTO.controls.authorities.setValue(user.authorities);
+        this.requestDTO.controls.activated.setValue(user.activated);
+        this.requestDTO.controls.firstName.setValue(user.firstName);
+        this.requestDTO.controls.lastName.setValue(user.lastName);
         this.authoritiesSelected = user.authorities;
         console.log(user);
       }
@@ -93,6 +98,14 @@ export class UserUpdateComponent implements OnInit {
     this.loading = false;
     this.totalRecords = headers.get('X-Total-Count');
     this.authorities = data;
+    if (this.user) {
+      for (let i = 0; i < data.length; i ++) {
+        if (this.inSelected(data[i])) {
+          this.authoritiesRequest.push(data[i]);
+        }
+      }
+      console.log(this.authoritiesRequest);
+    }
   }
 
   inSelected(authority) {
@@ -101,14 +114,19 @@ export class UserUpdateComponent implements OnInit {
 
   choose(authority) {
     this.authoritiesSelected.push(authority.name);
+    this.authoritiesRequest.push(authority);
+    console.log(this.authoritiesRequest);
+
   }
 
   unChoose(authority) {
     this.authoritiesSelected = this.authoritiesSelected.filter(a => a !== authority.name);
+    this.authoritiesRequest = this.authoritiesRequest.filter(a => a.name !== authority.name);
   }
 
   create() {
-    this.requestDTO.controls.authorities.setValue(this.authoritiesSelected);
+    console.log(this.authoritiesRequest);
+    this.requestDTO.controls.authorities.setValue(this.authoritiesRequest);
     const data = _.omitBy(this.requestDTO.value, _.isNil);
     if (this.user) {
       this.userService.update(data).subscribe(
