@@ -22,12 +22,10 @@
                     <tr *ngFor="let user of sortedData; let i = index">
                         <th scope="row">{{i + 1}}</th>
                         <td>{{user.firstName}}  {{user.lastName}}</td>
-                        <td *ngIf="!user.activated"><span class="badge rounded-pill bg-danger p-2">Không Hoạt động</span></td>
-                        <td *ngIf="user.activated"><span class="badge rounded-pill bg-success p-2">Hoạt động</span></td>
+                        <td *ngIf="!user.activated"><button class="button-none-background" (click)="updateEnable(user)"><span class="badge rounded-pill bg-danger p-2">Không Hoạt động</span></button></td>
+                        <td *ngIf="user.activated"><button class="button-none-background" (click)="updateDisable(user)"><span class="badge rounded-pill bg-success p-2">Hoạt động</span></button></td>
                         <td>
-                            <p class="m-0" *ngFor="let group of user.groups">
-                                <span class="badge badge-info p-2">{{ group.name }}</span>
-                            </p>
+                            {{user.position?.name}}
                         </td>
                         <td>{{user.createdDate | date:'d/M/yy, h:mm a'}}</td>
                         <td>{{user.createdBy}}</td>
@@ -38,11 +36,9 @@
                             <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle><i
                               class="fa fa-angle-double-down"></i></button>
                             <div ngbDropdownMenu>
-                              <button ngbDropdownItem class="btn btn-info" [routerLink]="['/detail', user.login]"><i
-                                class="fa fa-eye"></i> Xem
-                              </button>
-                              <button ngbDropdownItem class="btn btn-warning" [routerLink]="['/user/update', user.login]"><i class="fa fa-edit"></i> Sửa</button>
-                              <button ngbDropdownItem class="btn btn-danger"><i class="fa fa-trash"></i> Hoạt động
+                              <button ngbDropdownItem [routerLink]="['/detail', user.login]"><i class="fa fa-eye"></i> Xem</button>
+                              <button ngbDropdownItem [routerLink]="['/user/update', user.login]"><i class="fa fa-edit"></i> Sửa</button>
+                              <button ngbDropdownItem ><i class="fa fa-trash"></i> Hoạt động
                               </button>
                             </div>
                           </div>
@@ -56,3 +52,4 @@
         </div>
     </div>
 </div>
+<p-confirmDialog [style]="{width: 'auto'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" acceptLabel="Đồng ý" rejectLabel="Hủy"></p-confirmDialog>

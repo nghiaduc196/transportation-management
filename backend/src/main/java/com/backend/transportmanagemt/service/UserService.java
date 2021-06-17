@@ -193,14 +193,28 @@ public class UserService {
                 if (userDTO.getEmail() != null) {
                     user.setEmail(userDTO.getEmail().toLowerCase());
                 }
-//                user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.getActivated());
-//                user.setLangKey(userDTO.getLangKey());
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
                 Set<Authority> authorities = new HashSet<>(userDTO.getAuthorities());
                 user.setAuthorities(authorities);
 
+                this.clearUserCaches(user);
+                log.debug("Changed Information for User: {}", user);
+                return user;
+            })
+            .map(UserDTO::new);
+    }
+
+
+    public Optional<UserDTO> updateStatus(UserRequestDTO userDTO) {
+        return Optional.of(userRepository
+            .findById(userDTO.getId()))
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .map(user -> {
+                this.clearUserCaches(user);
+                user.setActivated(userDTO.getActivated());
                 this.clearUserCaches(user);
                 log.debug("Changed Information for User: {}", user);
                 return user;

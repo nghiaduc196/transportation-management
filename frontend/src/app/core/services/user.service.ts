@@ -54,6 +54,10 @@ export class UserService {
     return this.http.put<any>(this.SERVER_API_URL + 'users', user);
   }
 
+  updateStatus(user): Observable<any> {
+    return this.http.put<any>(this.SERVER_API_URL + 'users/update-status', user);
+  }
+
   find(login: string): Observable<any> {
     return this.http.get<any>(`${this.SERVER_API_URL + 'users'}/${login}`);
   }

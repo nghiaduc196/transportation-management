@@ -212,4 +212,18 @@ public class UserResource {
         userService.deleteUser(login);
         return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName,  "A user is deleted with identifier " + login, login)).build();
     }
+
+    @PutMapping("/users/update-status")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public ResponseEntity<UserDTO> updateStatus(@Valid @RequestBody UserRequestDTO userDTO) {
+        log.debug("REST request to update User : {}", userDTO);
+        Optional<User> existingUser = userRepository.findById(userDTO.getId());
+        if (!existingUser.isPresent()) {
+            throw new BadRequestAlertException("Can not find User", "userManagement", "idexists");
+        }
+        Optional<UserDTO> updatedUser = userService.updateStatus(userDTO);
+
+        return ResponseUtil.wrapOrNotFound(updatedUser,
+            HeaderUtil.createAlert(applicationName, "A user is updated with identifier " + updatedUser.get().getLogin(), updatedUser.get().getLogin()));
+    }
 }
