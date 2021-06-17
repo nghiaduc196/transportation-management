@@ -222,6 +222,21 @@ public class UserService {
             .map(UserDTO::new);
     }
 
+    public Optional<UserDTO> delete(Long id) {
+        return Optional.of(userRepository
+            .findById(id))
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .map(user -> {
+                this.clearUserCaches(user);
+                user.setDeleted(true);
+                this.clearUserCaches(user);
+                log.debug("Changed Information for User: {}", user);
+                return user;
+            })
+            .map(UserDTO::new);
+    }
+
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
             userRepository.delete(user);

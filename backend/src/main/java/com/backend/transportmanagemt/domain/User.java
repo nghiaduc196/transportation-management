@@ -120,6 +120,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "phone_number", length = 50)
     private String phoneNumber;
 
+    @NotNull
+    @Column(nullable = false)
+    private boolean deleted = false;
+
 
     public Long getId() {
         return id;
@@ -286,6 +290,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.address = address;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -325,6 +337,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", fcmToken='" + fcmToken + '\'' +
             ", position=" + position +
             ", phoneNumber='" + phoneNumber + '\'' +
+            ", deleted=" + deleted +
             '}';
     }
 }
