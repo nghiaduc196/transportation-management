@@ -36,10 +36,9 @@
                             <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle><i
                               class="fa fa-angle-double-down"></i></button>
                             <div ngbDropdownMenu>
-                              <button ngbDropdownItem (click)="openDialog(user)"><i class="fa fa-eye"></i> Xem</button>
-                              <button ngbDropdownItem [routerLink]="['/user/update', user.login]"><i class="fa fa-edit"></i> Sửa</button>
-                              <button ngbDropdownItem ><i class="fa fa-trash"></i> Hoạt động
-                              </button>
+                              <button ngbDropdownItem (click)="openDialog(user)"><i class="fa fa-eye"></i> Xem </button>
+                              <button ngbDropdownItem [routerLink]="['/user/update', user.login]"><i class="fa fa-edit"></i> Sửa </button>
+                              <button ngbDropdownItem ><i class="fa fa-trash"></i> Xóa </button>
                             </div>
                           </div>
                         </td>

@@ -60,7 +60,7 @@ export class UserListComponent implements OnInit {
       activated: true
     };
     this.confirmationService.confirm({
-      message: 'Bạn muốn kích hoạt cho tài khoản ?',
+      message: 'Bạn muốn kích hoạt cho tài khoản #' + data.login + ' ?',
       header: 'Cập nhật' ,
       icon: 'pi pi-info-circle',
       accept: () => {
@@ -88,7 +88,7 @@ export class UserListComponent implements OnInit {
       activated: false
     };
     this.confirmationService.confirm({
-      message: 'Bạn muốn hủy hoạt động của tài khoản ' + data.login + ' ?',
+      message: 'Bạn muốn hủy hoạt động của tài khoản #' + data.login + ' ?',
       header: 'Cập nhật' ,
       icon: 'pi pi-info-circle',
       accept: () => {
