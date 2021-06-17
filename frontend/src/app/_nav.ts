@@ -47,26 +47,26 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Quản lý tài khoản',
-    icon: 'icon-drop',
+    icon: 'fa fa-users',
     url: '/user',
     authorities: [ROLE.ADMIN],
     children: [
       {
         name: 'Danh sách tài khoản',
         url: '/user/list',
-        icon: 'icon-cursor'
+        icon: 'fa fa-list'
       },
       {
         name: 'Tạo tài khoản',
         url: '/user/create',
-        icon: 'icon-cursor'
+        icon: 'fa fa-plus'
       }
     ]
   },
   {
     name: 'Quản lý vị trí',
     url: '/position',
-    icon: 'icon-pencil',
+    icon: 'fa fa-list',
     authorities: [ROLE.ADMIN],
   }
   // {

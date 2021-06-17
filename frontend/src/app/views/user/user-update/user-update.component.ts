@@ -62,7 +62,9 @@ export class UserUpdateComponent implements OnInit {
         this.user = user;
         this.requestDTO.controls.id.setValue(user.id);
         this.requestDTO.controls.login.setValue(user.login);
-        this.requestDTO.controls.positionId.setValue(user.position.id);
+        if (user.position) {
+          this.requestDTO.controls.positionId.setValue(user.position.id);
+        }
         this.requestDTO.controls.authorities.setValue(user.authorities);
         this.requestDTO.controls.activated.setValue(user.activated);
         this.requestDTO.controls.firstName.setValue(user.firstName);
