@@ -68,13 +68,7 @@ export const navItems: NavData[] = [
     url: '/position',
     icon: 'icon-pencil',
     authorities: [ROLE.ADMIN],
-  },
-  {
-    name: 'Quản lý quyền',
-    url: '#',
-    icon: 'icon-pencil',
-    authorities: [ROLE.ADMIN],
-  },
+  }
   // {
   //   title: true,
   //   name: 'Components'

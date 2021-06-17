@@ -15,24 +15,26 @@ import {RippleModule} from 'primeng/ripple';
 import {TableModule} from 'primeng/table';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {DialogModule} from 'primeng/dialog';
 @NgModule({
   declarations: [UserListComponent, UserUpdateComponent],
-    imports: [
-        CommonModule,
-        UserRoutingModule,
-        PaginatorModule,
-        ToggleButtonModule,
-        SplitButtonModule,
-        InputTextModule,
-        ButtonModule,
-        FormsModule,
-        InputTextareaModule,
-        ReactiveFormsModule,
-        NgbDropdownModule,
-        RippleModule,
-        TableModule,
-        NgSelectModule,
-        ConfirmDialogModule
-    ]
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+    PaginatorModule,
+    ToggleButtonModule,
+    SplitButtonModule,
+    InputTextModule,
+    ButtonModule,
+    FormsModule,
+    InputTextareaModule,
+    ReactiveFormsModule,
+    NgbDropdownModule,
+    RippleModule,
+    TableModule,
+    NgSelectModule,
+    ConfirmDialogModule,
+    DialogModule
+  ]
 })
 export class UserModule { }

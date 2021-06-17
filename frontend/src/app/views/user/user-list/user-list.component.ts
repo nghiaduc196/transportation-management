@@ -17,6 +17,8 @@ export class UserListComponent implements OnInit {
   pageIndex = 0;
   sortDesc = true;
   pageSizeOption = [5, 10, 20];
+  display = false;
+  user: any;
   constructor(private userService: UserService,
               private router: Router,
               private confirmationService: ConfirmationService,
@@ -106,6 +108,11 @@ export class UserListComponent implements OnInit {
         }
       }
     });
+  }
+
+  openDialog(user) {
+    this.display = true;
+    this.user = user;
   }
 
 }

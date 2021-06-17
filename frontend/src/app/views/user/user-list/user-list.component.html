@@ -36,7 +36,7 @@
                             <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle><i
                               class="fa fa-angle-double-down"></i></button>
                             <div ngbDropdownMenu>
-                              <button ngbDropdownItem [routerLink]="['/detail', user.login]"><i class="fa fa-eye"></i> Xem</button>
+                              <button ngbDropdownItem (click)="openDialog(user)"><i class="fa fa-eye"></i> Xem</button>
                               <button ngbDropdownItem [routerLink]="['/user/update', user.login]"><i class="fa fa-edit"></i> Sửa</button>
                               <button ngbDropdownItem ><i class="fa fa-trash"></i> Hoạt động
                               </button>
@@ -53,3 +53,55 @@
     </div>
 </div>
 <p-confirmDialog [style]="{width: 'auto'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" acceptLabel="Đồng ý" rejectLabel="Hủy"></p-confirmDialog>
+<p-dialog [(visible)]="display" [positionTop]="50" [style]="{ width: '70vw' }" [baseZIndex]="10000" [modal]="true" [blockScroll]="true">
+  <ng-template pTemplate="header">
+    <p class="page-header">Thông tin chi tiết tài khoản <span> #{{user?.login}} </span> </p>
+  </ng-template>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mt-3">
+        <div class="p-field">
+          <p>Họ tên: <span>{{user?.firstName}} {{user?.lastName}}</span></p>
+        </div>
+      </div>
+      <div class="col-md-6 mt-3">
+        <div class="p-field">
+          <p>Số điện thoại: <span>{{user?.phoneNumber ? user?.phoneNumber : 'Chưa cập nhật thông tin'}}</span></p>
+        </div>
+      </div>
+      <div class="col-md-6 mt-3">
+        <div class="p-field">
+          <p>Email: <span>{{user?.email ? user?.email : 'Chưa cập nhật thông tin'}}</span></p>
+        </div>
+      </div>
+      <div class="col-md-6 mt-3">
+        <div class="p-field">
+          <p>Chức vụ: <span>{{user?.position?.name ? user?.position?.name : 'Chưa cập nhật thông tin'}}</span></p>
+        </div>
+      </div>
+      <div class="col-md-6 mt-3">
+        <div class="p-field">
+          <p>Tỉnh/Thành phố: <span>{{user?.province?.name ? user?.province?.name : 'Chưa cập nhật thông tin'}}</span></p>
+        </div>
+      </div>
+      <div class="col-md-6 mt-3">
+        <div class="p-field">
+          <p>Quận/Huyện: <span>{{user?.district?.name ? user?.district?.name : 'Chưa cập nhật thông tin'}}</span></p>
+        </div>
+      </div>
+      <div class="col-md-6 mt-3">
+        <div class="p-field">
+          <p>Xã/Phường: <span>{{user?.ward?.name ? user?.ward?.name : 'Chưa cập nhật thông tin'}}</span></p>
+        </div>
+      </div>
+      <div class="col-md-6 mt-3">
+        <div class="p-field">
+          <p>Địa chỉ: <span>{{user?.address ? user?.address : 'Chưa cập nhật thông tin'}}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--  <p-footer>-->
+<!--    buttons-->
+<!--  </p-footer>-->
+</p-dialog>
