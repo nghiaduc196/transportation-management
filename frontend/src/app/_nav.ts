@@ -68,7 +68,18 @@ export const navItems: NavData[] = [
     url: '/position',
     icon: 'fa fa-list',
     authorities: [ROLE.ADMIN],
-  }
+  },
+  {
+    title: true,
+    name: 'Công việc',
+    authorities: [ROLE.ADMIN, ROLE.USER],
+  },
+  {
+    name: 'Báo cáo',
+    url: '/',
+    icon: 'fa fa-list',
+    authorities: [ROLE.ADMIN],
+  },
   // {
   //   title: true,
   //   name: 'Components'
