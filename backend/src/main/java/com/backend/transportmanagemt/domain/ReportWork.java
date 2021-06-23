@@ -1,7 +1,10 @@
 package com.backend.transportmanagemt.domain;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "report_work")
@@ -29,6 +32,11 @@ public class ReportWork extends AbstractAuditingEntity implements Serializable {
     @Column(name = "phone_customer")
     private String phoneCustomer;
 
+    @Lob
+    @Column(name = "depcription")
+    private String depcription;
 
-
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "report_id")
+    private Set<ReportWorkDetail> workDetails;
 }
