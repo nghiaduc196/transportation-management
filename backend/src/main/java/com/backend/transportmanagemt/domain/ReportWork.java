@@ -8,7 +8,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "report_work")
-
 public class ReportWork extends AbstractAuditingEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -33,10 +32,77 @@ public class ReportWork extends AbstractAuditingEntity implements Serializable {
     private String phoneCustomer;
 
     @Lob
-    @Column(name = "depcription")
-    private String depcription;
+    @Column(name = "description")
+    private String description;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "report_id")
-    private Set<ReportWorkDetail> workDetails;
+    private Set<ReportWorkersDetail> workers;
+
+    public ReportWork() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getCreatedUser() {
+        return createdUser;
+    }
+
+    public void setCreatedUser(User createdUser) {
+        this.createdUser = createdUser;
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
+    public String getAddressStart() {
+        return addressStart;
+    }
+
+    public void setAddressStart(String addressStart) {
+        this.addressStart = addressStart;
+    }
+
+    public String getAddressEnd() {
+        return addressEnd;
+    }
+
+    public void setAddressEnd(String addressEnd) {
+        this.addressEnd = addressEnd;
+    }
+
+    public String getPhoneCustomer() {
+        return phoneCustomer;
+    }
+
+    public void setPhoneCustomer(String phoneCustomer) {
+        this.phoneCustomer = phoneCustomer;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<ReportWorkersDetail> getWorkers() {
+        return workers;
+    }
+
+    public void setWorkers(Set<ReportWorkersDetail> workers) {
+        this.workers = workers;
+    }
 }

@@ -52,6 +52,7 @@ public class District extends AbstractAuditingEntity{
         return province;
     }
 
+
     @Override
     public String toString() {
         return "District [code=" + code + ", name=" + name + ", province=" + province + "]";
