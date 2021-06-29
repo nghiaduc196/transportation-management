@@ -174,6 +174,13 @@ public class UserService {
         return user;
     }
 
+    public Optional<User> findById(Long id) {
+        if (id == null) {
+            return Optional.empty();
+        }
+        return userRepository.findById(id);
+    }
+
     /**
      * Update all information for a specific user, and return the modified user.
      *

@@ -1,52 +1,19 @@
-package com.backend.transportmanagemt.domain;
+package com.backend.transportmanagemt.service.dto;
 
-
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
-
-@Entity
-@Table(name = "report_work")
-public class ReportWork extends AbstractAuditingEntity implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ReportWorkRequestDTO {
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User createdUser;
-
-    @Column(name = "license_plate")
     private String licensePlate;
-
-    @Column(name = "address_start")
     private String addressStart;
-
-    @Column(name = "address_end")
     private String addressEnd;
-
-    @Column(name = "phone_customer")
     private String phoneCustomer;
-
-    @Column(name = "total_money")
-    private Double totalMoney;
-
-    @Lob
-    @Column(name = "description")
     private String description;
+    private Double totalMoney;
+    private Set<ReportWorkersDetailRequestDTO> workersDetailRequestDTOS;
+    private Set<ReportWorkersDetailRequestDTO> workersDetailDeleteRequestDTOS;
 
-    @Lob
-    @Column(name = "images")
-    private String images;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "report_id")
-    private Set<ReportWorkersDetail> workers;
-
-    public ReportWork() {
+    public ReportWorkRequestDTO() {
     }
 
     public Long getId() {
@@ -55,14 +22,6 @@ public class ReportWork extends AbstractAuditingEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public User getCreatedUser() {
-        return createdUser;
-    }
-
-    public void setCreatedUser(User createdUser) {
-        this.createdUser = createdUser;
     }
 
     public String getLicensePlate() {
@@ -105,20 +64,20 @@ public class ReportWork extends AbstractAuditingEntity implements Serializable {
         this.description = description;
     }
 
-    public Set<ReportWorkersDetail> getWorkers() {
-        return workers;
+    public Set<ReportWorkersDetailRequestDTO> getWorkersDetailRequestDTOS() {
+        return workersDetailRequestDTOS;
     }
 
-    public void setWorkers(Set<ReportWorkersDetail> workers) {
-        this.workers = workers;
+    public void setWorkersDetailRequestDTOS(Set<ReportWorkersDetailRequestDTO> workersDetailRequestDTOS) {
+        this.workersDetailRequestDTOS = workersDetailRequestDTOS;
     }
 
-    public String getImages() {
-        return images;
+    public Set<ReportWorkersDetailRequestDTO> getWorkersDetailDeleteRequestDTOS() {
+        return workersDetailDeleteRequestDTOS;
     }
 
-    public void setImages(String images) {
-        this.images = images;
+    public void setWorkersDetailDeleteRequestDTOS(Set<ReportWorkersDetailRequestDTO> workersDetailDeleteRequestDTOS) {
+        this.workersDetailDeleteRequestDTOS = workersDetailDeleteRequestDTOS;
     }
 
     public Double getTotalMoney() {

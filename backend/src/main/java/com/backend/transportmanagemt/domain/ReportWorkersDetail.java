@@ -16,7 +16,7 @@ public class ReportWorkersDetail extends AbstractAuditingEntity{
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User createdUser;
+    private User worker;
 
     @JsonIgnore
     @ManyToOne
@@ -34,12 +34,12 @@ public class ReportWorkersDetail extends AbstractAuditingEntity{
         this.id = id;
     }
 
-    public User getCreatedUser() {
-        return createdUser;
+    public User getWorker() {
+        return worker;
     }
 
-    public void setCreatedUser(User createdUser) {
-        this.createdUser = createdUser;
+    public void setWorker(User worker) {
+        this.worker = worker;
     }
 
     public ReportWork getReportWork() {

@@ -10,4 +10,31 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
+    private String baseDir;
+    private String baseUrl;
+    private String linkConfig;
+
+    public String getBaseDir() {
+        return baseDir;
+    }
+
+    public void setBaseDir(String baseDir) {
+        this.baseDir = baseDir;
+    }
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
+
+    public String getLinkConfig() {
+        return linkConfig;
+    }
+
+    public void setLinkConfig(String linkConfig) {
+        this.linkConfig = linkConfig;
+    }
 }
