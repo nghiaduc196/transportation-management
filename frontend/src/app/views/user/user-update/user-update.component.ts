@@ -19,8 +19,6 @@ export class UserUpdateComponent implements OnInit {
     id: [null],
     login: ['', Validators.required],
     password: ['', Validators.required],
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
     fullName: ['', Validators.required],
     activated: [true],
     positionId: [null],
@@ -68,8 +66,7 @@ export class UserUpdateComponent implements OnInit {
         }
         this.requestDTO.controls.authorities.setValue(user.authorities);
         this.requestDTO.controls.activated.setValue(user.activated);
-        this.requestDTO.controls.firstName.setValue(user.firstName);
-        this.requestDTO.controls.lastName.setValue(user.lastName);
+        this.requestDTO.controls.fullName.setValue(user.fullName);
         this.authoritiesSelected = user.authorities;
       }
     });
@@ -106,7 +103,6 @@ export class UserUpdateComponent implements OnInit {
           this.authoritiesRequest.push(data[i]);
         }
       }
-      console.log(this.authoritiesRequest);
     }
   }
 
@@ -117,8 +113,6 @@ export class UserUpdateComponent implements OnInit {
   choose(authority) {
     this.authoritiesSelected.push(authority.name);
     this.authoritiesRequest.push(authority);
-    console.log(this.authoritiesRequest);
-
   }
 
   unChoose(authority) {
@@ -127,7 +121,6 @@ export class UserUpdateComponent implements OnInit {
   }
 
   create() {
-    console.log(this.authoritiesRequest);
     this.requestDTO.controls.authorities.setValue(this.authoritiesRequest);
     const data = _.omitBy(this.requestDTO.value, _.isNil);
     if (this.user) {

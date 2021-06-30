@@ -53,21 +53,27 @@
               <label class="col-md-3 col-form-label">Tổng Tiền</label>
               <div class="col-md-9">
                 <input class="form-control" type="tel" placeholder="Tổng Tiền"
-                       formControlName="addressEnd" [class.is-invalid]="requestDTO.controls.totalMoney.invalid && (requestDTO.controls.totalMoney.dirty || requestDTO.controls.totalMoney.touched)">
+                       formControlName="totalMoney" [class.is-invalid]="requestDTO.controls.totalMoney.invalid && (requestDTO.controls.totalMoney.dirty || requestDTO.controls.totalMoney.touched)">
                 <div class="invalid-feedback" *ngIf="requestDTO.controls.totalMoney.errors?.required">
                   *Tổng tiền không được để trống
                 </div>
               </div>
             </div>
-
             <div class="form-group row">
               <label class="col-md-3 col-form-label">Nội dung công việc </label>
               <div class="col-md-9">
                 <textarea rows="3" type="text" class="form-control" formControlName="description"></textarea>
               </div>
             </div>
-
           </form>
+          <div class="form-group row mb-4">
+            <label class="col-md-3 col-form-label">Người cùng thực hiện công việc </label>
+            <div class="col-md-9">
+              <ng-select [items]="listWorkers" bindLabel="fullName" bindValue="id" [multiple]="true"
+                         placeholder="Lựa chọn người thực hiện cùng" [(ngModel)]="selectedWorkerIds">
+              </ng-select>
+            </div>
+          </div>
         </div>
         <hr>
         <div class="col-12 mb-4">
@@ -75,10 +81,10 @@
           <div class="form-group row">
             <div class="col-12" style="padding: 0; padding-left: 15px;">
               <div class="upload-img">
-                <div *ngIf="listOldImage.length > 0">
-                  <img  *ngFor="let url of listOldImage"  [src]="url" (click)="removeImgOld(url)" class="rounded" width="100"
-                        height="108" />
-                </div>
+<!--                <div *ngIf="listOldImage.length > 0">-->
+<!--                  <img  *ngFor="let url of listOldImage"  [src]="url" (click)="removeImgOld(url)" class="rounded" width="100"-->
+<!--                        height="108" />-->
+<!--                </div>-->
                 <div *ngIf="listImage">
                   <div *ngFor="let url of listImage" class="section-img">
                     <img  [src]="url"  class="rounded mb-3 " width="100" height="100" />
@@ -94,18 +100,6 @@
             <input style="display: none;" type="file" multiple (change)="detectFiles($event)" #inputUpload/>
           </div>
         </div>
-        <hr>
-        <div class="col-12">
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label">Người thực hiện công việc </label>
-            <div class="col-md-9">
-              <ng-select [items]="listUser" bindLabel="name" bindValue="id" [multiple]="true"
-                         placeholder="Lựa chọn người làm">
-              </ng-select>
-            </div>
-          </div>
-        </div>
-        <hr />
       </div>
     </div>
     <div class="card-footer">

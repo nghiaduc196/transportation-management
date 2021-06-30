@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
+import {UserService} from '../../../core/services/user.service';
 
 @Component({
   selector: 'app-update-report-work',
@@ -15,15 +16,28 @@ export class UpdateReportWorkComponent implements OnInit {
     addressEnd: [null],
     description: [null],
     totalMoney: [null],
+    workersDetailRequestDTOS: [null]
   });
   listOldImage = [];
   listImage = [];
   fileList = [];
   isPickedImage = false;
-  listUser = [];
-  constructor(private fb: FormBuilder) { }
+  listWorkers = [];
+  selectedWorkerIds = [];
+  constructor(private fb: FormBuilder, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.getListWorkers();
+  }
+
+  getListWorkers(): void {
+    const param = {
+      size: 1000,
+      page: 0,
+    };
+    this.userService.getAllWorkers(param).subscribe(res => {
+      this.listWorkers = res.body;
+    });
   }
 
   detectFiles(event): void {
@@ -48,5 +62,11 @@ export class UpdateReportWorkComponent implements OnInit {
     const f = this.fileList.filter(item => this.fileList.indexOf(item) !== index);
     this.listImage = this.listImage.filter(x => x !== url);
     this.fileList = f;
+  }
+
+  create(): void {
+    console.log(this.requestDTO.value);
+    console.log(this.selectedWorkerIds);
+
   }
 }

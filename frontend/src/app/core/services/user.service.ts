@@ -61,4 +61,8 @@ export class UserService {
   find(login: string): Observable<any> {
     return this.http.get<any>(`${this.SERVER_API_URL + 'users'}/${login}`);
   }
+
+  getAllWorkers(param?): Observable<HttpResponse<any>> {
+    return this.http.get<any>(this.SERVER_API_URL + 'users/worker', {params: param, observe: 'response'});
+  }
 }

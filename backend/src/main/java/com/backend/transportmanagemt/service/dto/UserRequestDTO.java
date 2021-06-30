@@ -6,8 +6,7 @@ import java.util.Set;
 public class UserRequestDTO {
     private Long id;
     private String login;
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String password;
     private String phone;
     private String email;
@@ -39,20 +38,12 @@ public class UserRequestDTO {
         this.login = login;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getPhone() {

@@ -21,7 +21,7 @@
                     <tbody>
                     <tr *ngFor="let user of sortedData; let i = index">
                         <th scope="row">{{i + 1}}</th>
-                        <td>{{user.firstName}}  {{user.lastName}}</td>
+                        <td>{{user?.fullName}}</td>
                         <td *ngIf="!user.activated"><button class="button-none-background" (click)="updateEnable(user)"><span class="badge rounded-pill bg-danger p-2">Không Hoạt động</span></button></td>
                         <td *ngIf="user.activated"><button class="button-none-background" (click)="updateDisable(user)"><span class="badge rounded-pill bg-success p-2">Hoạt động</span></button></td>
                         <td>

@@ -12,6 +12,7 @@ import com.backend.transportmanagemt.service.dto.UserDTO;
 
 import com.backend.transportmanagemt.service.dto.UserRequestDTO;
 import com.backend.transportmanagemt.service.dto.UserResponseDTO;
+import com.backend.transportmanagemt.service.dto.WorkerResponseDTO;
 import com.backend.transportmanagemt.web.rest.errors.LoginAlreadyUsedException;
 import io.github.jhipster.security.RandomUtil;
 
@@ -151,8 +152,7 @@ public class UserService {
             throw new LoginAlreadyUsedException();
         }
         user.setLogin(userDTO.getLogin().toLowerCase().replaceAll("\\s\\s+", " ").trim());
-        user.setFirstName(userDTO.getFirstName());
-        user.setLastName(userDTO.getLastName());
+        user.setFullName(userDTO.getFullName());
         if (userDTO.getEmail() != null) {
             user.setEmail(userDTO.getEmail().toLowerCase());
         }
@@ -195,8 +195,7 @@ public class UserService {
             .map(user -> {
                 this.clearUserCaches(user);
                 user.setLogin(userDTO.getLogin().toLowerCase());
-                user.setFirstName(userDTO.getFirstName());
-                user.setLastName(userDTO.getLastName());
+                user.setFullName(userDTO.getFullName());
                 if (userDTO.getEmail() != null) {
                     user.setEmail(userDTO.getEmail().toLowerCase());
                 }
@@ -302,6 +301,12 @@ public class UserService {
     @Transactional(readOnly = true)
     public Page<UserResponseDTO> getAllUsers(Pageable pageable) {
         return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserResponseDTO::new);
+    }
+
+
+    @Transactional(readOnly = true)
+    public Page<WorkerResponseDTO> getAllWorkers(Pageable pageable) {
+        return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(WorkerResponseDTO::new);
     }
 
     @Transactional(readOnly = true)

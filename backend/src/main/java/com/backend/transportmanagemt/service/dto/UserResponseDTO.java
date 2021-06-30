@@ -9,8 +9,7 @@ import java.util.stream.Collectors;
 public class UserResponseDTO {
     private Long id;
     private String login;
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String email;
     private String imageUrl;
     private boolean activated;
@@ -30,8 +29,7 @@ public class UserResponseDTO {
     public UserResponseDTO(User user) {
         this.id = user.getId();
         this.login = user.getLogin();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
+        this.fullName = user.getFullName();
         this.email = user.getEmail();
         this.imageUrl = user.getImageUrl();
         this.activated = user.getActivated();
@@ -64,20 +62,12 @@ public class UserResponseDTO {
         this.login = login;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {

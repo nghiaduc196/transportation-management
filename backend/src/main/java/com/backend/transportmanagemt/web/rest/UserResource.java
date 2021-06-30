@@ -5,13 +5,10 @@ import com.backend.transportmanagemt.domain.User;
 import com.backend.transportmanagemt.repository.UserRepository;
 import com.backend.transportmanagemt.security.AuthoritiesConstants;
 import com.backend.transportmanagemt.service.MailService;
-import com.backend.transportmanagemt.service.dto.AuthoritiesResponseDTO;
-import com.backend.transportmanagemt.service.dto.UserRequestDTO;
-import com.backend.transportmanagemt.service.dto.UserResponseDTO;
+import com.backend.transportmanagemt.service.dto.*;
 import org.springframework.data.domain.Sort;
 import java.util.Collections;
 import com.backend.transportmanagemt.service.UserService;
-import com.backend.transportmanagemt.service.dto.UserDTO;
 import com.backend.transportmanagemt.web.rest.errors.BadRequestAlertException;
 import com.backend.transportmanagemt.web.rest.errors.EmailAlreadyUsedException;
 import com.backend.transportmanagemt.web.rest.errors.LoginAlreadyUsedException;
@@ -225,5 +222,15 @@ public class UserResource {
 
         return ResponseUtil.wrapOrNotFound(updatedUser,
             HeaderUtil.createAlert(applicationName, "A user is updated with identifier " + updatedUser.get().getLogin(), updatedUser.get().getLogin()));
+    }
+
+    @GetMapping("/users/worker")
+    public ResponseEntity<List<WorkerResponseDTO>> getAllWorkers(Pageable pageable) {
+        if (!onlyContainsAllowedProperties(pageable)) {
+            return ResponseEntity.badRequest().build();
+        }
+        final Page<WorkerResponseDTO> page = userService.getAllWorkers(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }
