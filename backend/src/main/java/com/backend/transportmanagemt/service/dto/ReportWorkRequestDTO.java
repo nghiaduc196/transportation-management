@@ -1,5 +1,9 @@
 package com.backend.transportmanagemt.service.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Set;
 
 public class ReportWorkRequestDTO {
@@ -9,9 +13,13 @@ public class ReportWorkRequestDTO {
     private String addressEnd;
     private String phoneCustomer;
     private String description;
-    private Double totalMoney;
+    private BigDecimal totalMoney;
     private Set<ReportWorkersDetailRequestDTO> workersDetailRequestDTOS;
     private Set<ReportWorkersDetailRequestDTO> workersDetailDeleteRequestDTOS;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endDate;
 
     public ReportWorkRequestDTO() {
     }
@@ -80,11 +88,42 @@ public class ReportWorkRequestDTO {
         this.workersDetailDeleteRequestDTOS = workersDetailDeleteRequestDTOS;
     }
 
-    public Double getTotalMoney() {
+    public BigDecimal getTotalMoney() {
         return totalMoney;
     }
 
-    public void setTotalMoney(Double totalMoney) {
+    public void setTotalMoney(BigDecimal totalMoney) {
         this.totalMoney = totalMoney;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    @Override
+    public String toString() {
+        return "ReportWorkRequestDTO{" +
+            "id=" + id +
+            ", licensePlate='" + licensePlate + '\'' +
+            ", addressStart='" + addressStart + '\'' +
+            ", addressEnd='" + addressEnd + '\'' +
+            ", phoneCustomer='" + phoneCustomer + '\'' +
+            ", description='" + description + '\'' +
+            ", totalMoney=" + totalMoney +
+            ", workersDetailRequestDTOS=" + workersDetailRequestDTOS +
+            ", workersDetailDeleteRequestDTOS=" + workersDetailDeleteRequestDTOS +
+            '}';
     }
 }

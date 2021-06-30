@@ -28,29 +28,15 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="firstName">Họ</label>
+                  <label class="col-md-3 col-form-label">Tên nhân viên</label>
                   <div class="col-md-9">
-                    <input class="form-control" id="firstName" type="text" name="firstName" placeholder="Họ" required
-                           formControlName="firstName" maxlength="50"  [class.is-invalid]="requestDTO.controls.firstName.invalid && (requestDTO.controls.firstName.dirty || requestDTO.controls.firstName.touched)">
-                    <div class="invalid-feedback" *ngIf="requestDTO.controls.firstName.errors?.required">
-                      *Họ không được để trống
+                    <input class="form-control" type="text" name="fullName" placeholder="Tên nhân viên" required
+                           formControlName="fullName" maxlength="50"  [class.is-invalid]="requestDTO.controls.fullName.invalid && (requestDTO.controls.fullName.dirty || requestDTO.controls.fullName.touched)">
+                    <div class="invalid-feedback" *ngIf="requestDTO.controls.fullName.errors?.required">
+                      *Tên nhân viên không được để trống
                     </div>
-                    <div class="invalid-feedback" *ngIf="requestDTO.controls.firstName.errors?.maxlength">
-                      *Họ không được dài hơn 50 ký tự
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="lastName">Tên</label>
-                  <div class="col-md-9">
-                    <input class="form-control" id="lastName" type="text" name="lastName" placeholder="Tên"
-                           formControlName="lastName" maxlength="50" required
-                           [class.is-invalid]="requestDTO.controls.lastName.invalid && (requestDTO.controls.lastName.dirty || requestDTO.controls.lastName.touched)">
-                    <div class="invalid-feedback" *ngIf="requestDTO.controls.lastName.errors?.required">
-                      *Tên không được để trống
-                    </div>
-                    <div class="invalid-feedback" *ngIf="requestDTO.controls.lastName.errors?.maxlength">
-                      *Tên không được dài hơn 50 ký tự
+                    <div class="invalid-feedback" *ngIf="requestDTO.controls.fullName.errors?.maxlength">
+                      *Tên nhân viên không được dài hơn 50 ký tự
                     </div>
                   </div>
                 </div>

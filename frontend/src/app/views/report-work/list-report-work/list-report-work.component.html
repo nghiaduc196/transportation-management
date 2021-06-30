@@ -1,0 +1,51 @@
+<div class="animated fadeIn">
+<!--  <p-toast [baseZIndex]="1000" [style]="{width: 'auto'}"></p-toast>-->
+  <div class="card">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i>
+      <h5 class="card-header-text d-inline-block">Danh sách báo cáo</h5>
+      <button  class="btn btn-success float-right" routerLink="/report-work/create">Tạo báo cáo</button>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+          <tr style="white-space: nowrap">
+            <th scope="col">STT</th>
+            <th scope="col">Tên Khách hàng</th>
+            <th scope="col">Điện thoại khách hàng</th>
+            <th scope="col">Địa điểm đi</th>
+            <th scope="col">Địa điểm kết thúc</th>
+            <th scope="col">Tổng tiền</th>
+            <th scope="col">Ngày báo cáo</th>
+            <th scope="col">Người tạo</th>
+            <th scope="col">#</th>
+          </tr>
+          </thead>
+          <tbody *ngIf="sortedData.length > 0">
+            <tr *ngFor="let report of sortedData; let i = index">
+              <th scope="row">{{i + 1}}</th>
+
+              <th class="overflow-hidden">
+                <div ngbDropdown container="body">
+                  <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle><i class="fa fa-angle-double-down"></i></button>
+                  <div ngbDropdownMenu>
+                    <button ngbDropdownItem (click)="openEdit(report)"><i class="fa fa-edit"></i>Sửa</button>
+                    <button ngbDropdownItem (click)="delete(report)"><i class="fa fa-trash"></i>Xóa</button>
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </tbody>
+          <tbody *ngIf="sortedData.length === 0">
+            <tr>
+              <th colspan="9" rowspan="1" class="text-center"> Không có danh sách </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p-paginator [rows]="10" [totalRecords]="totalData" [rowsPerPageOptions]="pageSizeOption"
+                   (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+  </div>
+</div>

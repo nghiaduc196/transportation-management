@@ -21,6 +21,7 @@ export class UserUpdateComponent implements OnInit {
     password: ['', Validators.required],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
+    fullName: ['', Validators.required],
     activated: [true],
     positionId: [null],
     authorities: [null]
@@ -70,7 +71,6 @@ export class UserUpdateComponent implements OnInit {
         this.requestDTO.controls.firstName.setValue(user.firstName);
         this.requestDTO.controls.lastName.setValue(user.lastName);
         this.authoritiesSelected = user.authorities;
-        console.log(user);
       }
     });
   }

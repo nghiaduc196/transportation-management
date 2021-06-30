@@ -76,9 +76,21 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Báo cáo',
-    url: '/',
+    url: '/report-work',
     icon: 'fa fa-list',
     authorities: [ROLE.ADMIN],
+    children: [
+      {
+        name: 'Danh sách báo cáo',
+        url: '/report-work/list',
+        icon: 'fa fa-list'
+      },
+      {
+        name: 'Tạo báo cáo',
+        url: '/report-work/create',
+        icon: 'fa fa-plus'
+      }
+    ]
   },
   // {
   //   title: true,

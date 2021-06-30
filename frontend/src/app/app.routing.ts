@@ -67,6 +67,10 @@ export const routes: Routes = [
         path: 'position',
         loadChildren: () => import('./views/position/position.module').then(m => m.PositionModule)
       },
+      {
+        path: 'report-work',
+        loadChildren: () => import('./views/report-work/report-work.module').then(m => m.ReportWorkModule)
+      },
     ]
   },
   { path: '**', component: P404Component }

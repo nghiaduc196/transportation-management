@@ -1,10 +1,9 @@
 package com.backend.transportmanagemt.domain;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Set;
-
 
 @Entity
 @Table(name = "report_work")
@@ -28,11 +27,14 @@ public class ReportWork extends AbstractAuditingEntity implements Serializable {
     @Column(name = "address_end")
     private String addressEnd;
 
+    @Column(name = "name_customer")
+    private String nameCustomer;
+
     @Column(name = "phone_customer")
     private String phoneCustomer;
 
     @Column(name = "total_money")
-    private Double totalMoney;
+    private BigDecimal totalMoney;
 
     @Lob
     @Column(name = "description")
@@ -121,11 +123,19 @@ public class ReportWork extends AbstractAuditingEntity implements Serializable {
         this.images = images;
     }
 
-    public Double getTotalMoney() {
+    public BigDecimal getTotalMoney() {
         return totalMoney;
     }
 
-    public void setTotalMoney(Double totalMoney) {
+    public void setTotalMoney(BigDecimal totalMoney) {
         this.totalMoney = totalMoney;
+    }
+
+    public String getNameCustomer() {
+        return nameCustomer;
+    }
+
+    public void setNameCustomer(String nameCustomer) {
+        this.nameCustomer = nameCustomer;
     }
 }

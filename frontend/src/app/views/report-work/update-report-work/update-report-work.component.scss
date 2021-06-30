@@ -1,0 +1,33 @@
+.button-img {
+  width: 110px;
+  height: 110px;
+  background: #fafbff;
+  border: 1px dashed #ededed;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding-top: 20px;
+
+  .text-upload {
+    font-size: 14px;
+    color: #999999;
+    font-weight: 400;
+    display: block;
+    margin-top: -8px;
+  }
+  img {
+    margin-top: -40px;
+  }
+}
+
+.section-img {
+  display: inline-block;
+  position: relative;
+  .rounded {
+    margin-right: 20px;
+  }
+  .icon-cancel {
+    position: absolute;
+    right: 5px;
+    top: -14px;
+  }
+}

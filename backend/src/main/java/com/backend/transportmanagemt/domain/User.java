@@ -120,6 +120,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "phone_number", length = 50)
     private String phoneNumber;
 
+    @Column(name = "full_name")
+    private String fullName;
+
     @NotNull
     @Column(nullable = false)
     private boolean deleted = false;
@@ -298,6 +301,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.deleted = deleted;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -319,25 +330,18 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return "User{" +
             "id=" + id +
             ", login='" + login + '\'' +
-            ", password='" + password + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
-            ", activated=" + activated +
-            ", langKey='" + langKey + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
-            ", activationKey='" + activationKey + '\'' +
-            ", resetKey='" + resetKey + '\'' +
-            ", resetDate=" + resetDate +
             ", authorities=" + authorities +
             ", province=" + province +
             ", district=" + district +
             ", ward=" + ward +
             ", address='" + address + '\'' +
-            ", fcmToken='" + fcmToken + '\'' +
             ", position=" + position +
             ", phoneNumber='" + phoneNumber + '\'' +
-            ", deleted=" + deleted +
+            ", fullName='" + fullName + '\'' +
             '}';
     }
 }

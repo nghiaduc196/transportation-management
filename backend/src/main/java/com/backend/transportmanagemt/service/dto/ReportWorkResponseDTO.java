@@ -1,7 +1,9 @@
 package com.backend.transportmanagemt.service.dto;
 
 import com.backend.transportmanagemt.domain.ReportWork;
+import com.backend.transportmanagemt.domain.User;
 
+import java.math.BigDecimal;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,7 +15,8 @@ public class ReportWorkResponseDTO {
     private String phoneCustomer;
     private String description;
     private String images;
-    private Double totalMoney;
+    private BigDecimal totalMoney;
+    private String userCreated;
     private Set<ReportWorkersDetailResponseDTO> workers;
 
     public ReportWorkResponseDTO(ReportWork reportWork) {
@@ -25,6 +28,7 @@ public class ReportWorkResponseDTO {
         this.description = reportWork.getDescription();
         this.images = reportWork.getImages();
         this.totalMoney = reportWork.getTotalMoney();
+        this.userCreated = reportWork.getCreatedUser().getFullName();
         this.workers = reportWork.getWorkers().stream().map(ReportWorkersDetailResponseDTO::new).collect(Collectors.toSet());
     }
 
@@ -84,11 +88,11 @@ public class ReportWorkResponseDTO {
         this.images = images;
     }
 
-    public Double getTotalMoney() {
+    public BigDecimal getTotalMoney() {
         return totalMoney;
     }
 
-    public void setTotalMoney(Double totalMoney) {
+    public void setTotalMoney(BigDecimal totalMoney) {
         this.totalMoney = totalMoney;
     }
 

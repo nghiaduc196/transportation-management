@@ -10,9 +10,14 @@ import com.backend.transportmanagemt.service.dto.ReportWorkersDetailRequestDTO;
 import com.backend.transportmanagemt.web.rest.errors.StorageException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,11 +28,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.Instant;
 import java.util.*;
 
 @Service
 @Transactional
 public class ReportWorkService {
+    private final Logger log = LoggerFactory.getLogger(ReportWorkService.class);
 
     @Autowired
     ReportWorkRepository reportWorkRepository;
@@ -77,7 +84,6 @@ public class ReportWorkService {
         reportWork.setLicensePlate(requestDTO.getLicensePlate());
         reportWork.setTotalMoney(requestDTO.getTotalMoney());
         Set<ReportWorkersDetail> workersDetails = new HashSet<>();
-
         for(ReportWorkersDetailRequestDTO item: requestDTO.getWorkersDetailRequestDTOS()) {
             ReportWorkersDetail workersDetail = new ReportWorkersDetail();
             User worker = userService.findById(item.getUserId()).orElse(null);
@@ -85,7 +91,6 @@ public class ReportWorkService {
             workersDetails.add(workersDetail);
         }
         reportWork.setWorkers(workersDetails);
-
 
         if (images != null && images.length > 0) {
             List<String> listImages = creatPathFile(images);
@@ -95,6 +100,23 @@ public class ReportWorkService {
         }
 
         ReportWork result = reportWorkRepository.save(reportWork);
-        return null;
+        return result;
+    }
+
+    public Page<ReportWork> filter(ReportWorkRequestDTO requestDTO, Pageable pageable) {
+        log.debug("call filter method {}", requestDTO);
+        Instant startDate = null;
+        Instant endDate = null;
+        Calendar calendar = Calendar.getInstance();
+        if (requestDTO.getStartDate() != null) {
+            calendar.setTime(requestDTO.getStartDate());
+            startDate = calendar.getTime().toInstant();
+        }
+        if (requestDTO.getEndDate() != null) {
+            calendar.setTime(requestDTO.getEndDate());
+            calendar.add(Calendar.DATE, 1);
+            endDate =  calendar.getTime().toInstant();
+        }
+        return reportWorkRepository.filter(pageable);
     }
 }

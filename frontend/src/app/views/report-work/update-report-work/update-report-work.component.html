@@ -1,0 +1,114 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      <strong> Tạo báo cáo </strong>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <form class="needs-validation form-horizontal" [formGroup]="requestDTO">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="login">Tên Khách hàng</label>
+              <div class="col-md-9">
+                <input class="form-control" id="login" type="text" placeholder="Tên khách hàng"
+                       formControlName="nameCustomer" [class.is-invalid]="requestDTO.controls.nameCustomer.invalid && (requestDTO.controls.nameCustomer.dirty || requestDTO.controls.nameCustomer.touched)">
+                <div class="invalid-feedback" *ngIf="requestDTO.controls.nameCustomer.errors?.required">
+                  *Tên khách hàng không được để trống
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Số điện thoại Khách hàng</label>
+              <div class="col-md-9">
+                <input class="form-control" type="text" placeholder="Số điện thoại khách hàng"
+                       formControlName="phoneCustomer" [class.is-invalid]="requestDTO.controls.phoneCustomer.invalid && (requestDTO.controls.phoneCustomer.dirty || requestDTO.controls.nameCustomer.touched)">
+                <div class="invalid-feedback" *ngIf="requestDTO.controls.phoneCustomer.errors?.required">
+                  *Số điện thoại khách hàng không được để trống
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Địa chỉ đi</label>
+              <div class="col-md-9">
+                <input class="form-control" type="text" placeholder="Địa chỉ đi"
+                       formControlName="addressStart" [class.is-invalid]="requestDTO.controls.addressStart.invalid && (requestDTO.controls.addressStart.dirty || requestDTO.controls.addressStart.touched)">
+                <div class="invalid-feedback" *ngIf="requestDTO.controls.addressStart.errors?.required">
+                  *Địa chỉ đi không được để trống
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Địa chỉ đến</label>
+              <div class="col-md-9">
+                <input class="form-control" type="text" placeholder="Địa chỉ đến"
+                       formControlName="addressEnd" [class.is-invalid]="requestDTO.controls.addressEnd.invalid && (requestDTO.controls.addressEnd.dirty || requestDTO.controls.addressEnd.touched)">
+                <div class="invalid-feedback" *ngIf="requestDTO.controls.addressEnd.errors?.required">
+                  *Địa chỉ điến không được để trống
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Tổng Tiền</label>
+              <div class="col-md-9">
+                <input class="form-control" type="tel" placeholder="Tổng Tiền"
+                       formControlName="addressEnd" [class.is-invalid]="requestDTO.controls.totalMoney.invalid && (requestDTO.controls.totalMoney.dirty || requestDTO.controls.totalMoney.touched)">
+                <div class="invalid-feedback" *ngIf="requestDTO.controls.totalMoney.errors?.required">
+                  *Tổng tiền không được để trống
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Nội dung công việc </label>
+              <div class="col-md-9">
+                <textarea rows="3" type="text" class="form-control" formControlName="description"></textarea>
+              </div>
+            </div>
+
+          </form>
+        </div>
+        <hr>
+        <div class="col-12 mb-4">
+          <p class="mt-0 mb-2">Upload ảnh</p>
+          <div class="form-group row">
+            <div class="col-12" style="padding: 0; padding-left: 15px;">
+              <div class="upload-img">
+                <div *ngIf="listOldImage.length > 0">
+                  <img  *ngFor="let url of listOldImage"  [src]="url" (click)="removeImgOld(url)" class="rounded" width="100"
+                        height="108" />
+                </div>
+                <div *ngIf="listImage">
+                  <div *ngFor="let url of listImage" class="section-img">
+                    <img  [src]="url"  class="rounded mb-3 " width="100" height="100" />
+                    <img class="icon-cancel" (click)="removeImg(url)" src="../../../../assets/img/icon/icon-cancel.svg" alt="">
+                  </div>
+                  <button class="button-img" (click)="inputUpload.click()">
+                    <img src="../../../../assets/img/icon/upload-image.svg" >
+                    <span class="text-upload"> Thêm ảnh </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <input style="display: none;" type="file" multiple (change)="detectFiles($event)" #inputUpload/>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-auto mr-auto">
+          <button pButton pRipple icon="pi pi-chevron-left" type="button"
+                  label="Quay lại"
+                  class="p-button-raised p-button-secondary"></button>
+        </div>
+        <div class="col-auto">
+          <button pButton pRipple (click)="create()" icon="pi pi-pencil" type="button" label="Lưu lại"
+                  class="p-button-raised p-button-success"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
