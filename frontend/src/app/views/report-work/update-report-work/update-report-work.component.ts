@@ -20,7 +20,7 @@ export class UpdateReportWorkComponent implements OnInit {
   listImage = [];
   fileList = [];
   isPickedImage = false;
-
+  listUser = [];
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
