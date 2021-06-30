@@ -21,6 +21,7 @@
     <include file="changelog/00000000000005_column_user_table.sql" relativeToChangelogFile="true"/>
     <include file="changelog/00000000000006_create_position_table.sql" relativeToChangelogFile="true"/>
     <include file="changelog/00000000000007_add_column_deleted_user_table.sql" relativeToChangelogFile="true"/>
+    <include file="changelog/00000000000008_create_report_work_table_and_update_user_table.sql" relativeToChangelogFile="true"/>
 
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
