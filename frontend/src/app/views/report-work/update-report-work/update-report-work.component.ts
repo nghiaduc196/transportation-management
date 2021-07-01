@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {UserService} from '../../../core/services/user.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-update-report-work',
@@ -67,6 +68,25 @@ export class UpdateReportWorkComponent implements OnInit {
   create(): void {
     console.log(this.requestDTO.value);
     console.log(this.selectedWorkerIds);
-
+    const data = _.omitBy(this.requestDTO.value, _.isNil);
+    const reportWork = new FormData();
+    Object.keys(data).map(key => {
+      reportWork.append(key, data[key]);
+    });
+    if (this.fileList) {
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.fileList.length; i++) {
+        reportWork.append('images', this.fileList[i]);
+      }
+    }
+    // this.bookingCarService.create(bookingCar).subscribe(() => {
+    //   this.waitingStoreService.emitData(false);
+    //   this.messageStoreService.listeningActionSendMessageNotification({
+    //     severity: 'success',
+    //     summary: 'Thành công',
+    //     detail: 'Đăng ký bán xe thành công. Chúng tôi sẽ gửi đề xuất giá sau khi kiểm định'
+    //   });
+    //   this.router.navigate(['old-car']);
+    // });
   }
 }
