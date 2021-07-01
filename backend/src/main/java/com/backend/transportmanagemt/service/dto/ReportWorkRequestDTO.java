@@ -14,7 +14,7 @@ public class ReportWorkRequestDTO {
     private String phoneCustomer;
     private String description;
     private BigDecimal totalMoney;
-    private Set<ReportWorkersDetailRequestDTO> workersDetailRequestDTOS;
+    private Set<Long> workersDetailRequestDTOS;
     private Set<ReportWorkersDetailRequestDTO> workersDetailDeleteRequestDTOS;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
@@ -72,11 +72,11 @@ public class ReportWorkRequestDTO {
         this.description = description;
     }
 
-    public Set<ReportWorkersDetailRequestDTO> getWorkersDetailRequestDTOS() {
+    public Set<Long> getWorkersDetailRequestDTOS() {
         return workersDetailRequestDTOS;
     }
 
-    public void setWorkersDetailRequestDTOS(Set<ReportWorkersDetailRequestDTO> workersDetailRequestDTOS) {
+    public void setWorkersDetailRequestDTOS(Set<Long> workersDetailRequestDTOS) {
         this.workersDetailRequestDTOS = workersDetailRequestDTOS;
     }
 

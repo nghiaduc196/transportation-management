@@ -60,6 +60,7 @@
     "ng-jhipster": "^0.16.0",
     "ng2-charts": "^2.4.2",
     "ngx-bootstrap": "^6.2.0",
+    "ngx-currency": "^2.5.2",
     "ngx-perfect-scrollbar": "^10.1.0",
     "ngx-webstorage": "^8.0.0",
     "primeicons": "^4.1.0",

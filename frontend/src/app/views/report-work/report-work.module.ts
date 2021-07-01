@@ -10,6 +10,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {NgxCurrencyModule} from 'ngx-currency';
 
 
 
@@ -18,16 +19,17 @@ import {NgSelectModule} from '@ng-select/ng-select';
     UpdateReportWorkComponent,
     ListReportWorkComponent
   ],
-  imports: [
-    CommonModule,
-    ReportWorkRoutingModule,
-    ToastModule,
-    NgbDropdownModule,
-    PaginatorModule,
-    ReactiveFormsModule,
-    ButtonModule,
-    RippleModule,
-    NgSelectModule
-  ]
+    imports: [
+        CommonModule,
+        ReportWorkRoutingModule,
+        ToastModule,
+        NgbDropdownModule,
+        PaginatorModule,
+        ReactiveFormsModule,
+        ButtonModule,
+        RippleModule,
+        NgSelectModule,
+        NgxCurrencyModule
+    ]
 })
 export class ReportWorkModule { }

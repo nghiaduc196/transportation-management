@@ -134,4 +134,7 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+application:
+  link-config: /usr/local/pimpim/firebase-config
+  base-dir: /usr/local/pimpim/data
+  base-url: https://media.vcna.top

@@ -50,9 +50,20 @@
             </div>
 
             <div class="form-group row">
+              <label class="col-md-3 col-form-label">Biển số xe</label>
+              <div class="col-md-9">
+                <input class="form-control" type="text" placeholder="Biển số xe"
+                       formControlName="licensePlate" [class.is-invalid]="requestDTO.controls.licensePlate.invalid && (requestDTO.controls.licensePlate.dirty || requestDTO.controls.licensePlate.touched)">
+                <div class="invalid-feedback" *ngIf="requestDTO.controls.licensePlate.errors?.required">
+                  *Biển số xe không được để trống
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
               <label class="col-md-3 col-form-label">Tổng Tiền</label>
               <div class="col-md-9">
-                <input class="form-control" type="tel" placeholder="Tổng Tiền"
+                <input currencyMask class="form-control" type="tel" placeholder="Tổng Tiền"
                        formControlName="totalMoney" [class.is-invalid]="requestDTO.controls.totalMoney.invalid && (requestDTO.controls.totalMoney.dirty || requestDTO.controls.totalMoney.touched)">
                 <div class="invalid-feedback" *ngIf="requestDTO.controls.totalMoney.errors?.required">
                   *Tổng tiền không được để trống

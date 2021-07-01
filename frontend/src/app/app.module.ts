@@ -47,6 +47,20 @@ import {AuthExpiredInterceptor} from './blocks/interceptor/auth-expired.intercep
 import {ErrorHandlerInterceptor} from './blocks/interceptor/errorhandler.interceptor';
 import {NgJhipsterModule} from 'ng-jhipster';
 import {NgxWebstorageModule} from 'ngx-webstorage';
+import {NgxCurrencyModule} from 'ngx-currency';
+
+
+export const customCurrencyMaskConfig = {
+  align: 'right',
+  allowNegative: false,
+  allowZero: true,
+  decimal: '.',
+  precision: 0,
+  prefix: '',
+  suffix: '',
+  thousands: ',',
+  nullable: true
+};
 
 @NgModule({
   imports: [
@@ -71,6 +85,7 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
     ChartsModule,
     IconModule,
     IconSetModule.forRoot(),
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
   ],
   declarations: [
     AppComponent,

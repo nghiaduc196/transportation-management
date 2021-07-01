@@ -84,9 +84,9 @@ public class ReportWorkService {
         reportWork.setLicensePlate(requestDTO.getLicensePlate());
         reportWork.setTotalMoney(requestDTO.getTotalMoney());
         Set<ReportWorkersDetail> workersDetails = new HashSet<>();
-        for(ReportWorkersDetailRequestDTO item: requestDTO.getWorkersDetailRequestDTOS()) {
+        for(Long item: requestDTO.getWorkersDetailRequestDTOS()) {
             ReportWorkersDetail workersDetail = new ReportWorkersDetail();
-            User worker = userService.findById(item.getUserId()).orElse(null);
+            User worker = userService.findById(item).orElse(null);
             workersDetail.setWorker(worker);
             workersDetails.add(workersDetail);
         }
