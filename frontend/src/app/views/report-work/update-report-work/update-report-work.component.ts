@@ -17,7 +17,7 @@ export class UpdateReportWorkComponent implements OnInit {
   requestDTO = this.fb.group({
     id: [null],
     nameCustomer: [null, Validators.required],
-    phoneCustomer: [null, Validators.required],
+    phoneCustomer: [null, [Validators.required, Validators.pattern(/^\d{10}$|^\d{11}$/)]],
     addressStart: [null, Validators.required],
     addressEnd: [null, Validators.required],
     description: [null, Validators.required],
@@ -81,31 +81,26 @@ export class UpdateReportWorkComponent implements OnInit {
   }
 
   create(): void {
-    console.log(this.requestDTO.value);
-    console.log(this.selectedWorkerIds);
-    // const reportWorkersDetailRequestDTO = [];
-    // for (let i = 0; i < this.selectedWorkerIds.length; i++) {
-    //   const param = {
-    //     userId: this.selectedWorkerIds[i]
-    //   };
-    //   reportWorkersDetailRequestDTO.push(param);
-    // }
     this.requestDTO.controls.workersDetailRequestDTOS.setValue(this.selectedWorkerIds);
-    const data = _.omitBy(this.requestDTO.value, _.isNil);
-    console.log(data);
-    const reportWork = new FormData();
-    Object.keys(data).map(key => {
-      reportWork.append(key, data[key]);
-    });
-    if (this.fileList) {
-      // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < this.fileList.length; i++) {
-        reportWork.append('images', this.fileList[i]);
+    if (!this.requestDTO.valid) {
+      this.messageService.add({severity: 'warn', summary: 'Cảnh báo', detail: 'Vui lòng nhập hết các thông tin'});
+    } else  {
+      const data = _.omitBy(this.requestDTO.value, _.isNil);
+      console.log(data);
+      const reportWork = new FormData();
+      Object.keys(data).map(key => {
+        reportWork.append(key, data[key]);
+      });
+      if (this.fileList) {
+        // tslint:disable-next-line:prefer-for-of
+        for (let i = 0; i < this.fileList.length; i++) {
+          reportWork.append('images', this.fileList[i]);
+        }
       }
+      this.reportWorkService.create(reportWork).subscribe(() => {
+        this.messageService.add({severity: 'success', summary: 'Thành công', detail: 'Tạo mới thành công'});
+        this.router.navigate(['report-work/list']);
+      });
     }
-    this.reportWorkService.create(reportWork).subscribe(() => {
-      this.messageService.add({severity: 'success', summary: 'Thành công', detail: 'Tạo mới thành công'});
-      this.router.navigate(['report-work/list']);
-    });
   }
 }

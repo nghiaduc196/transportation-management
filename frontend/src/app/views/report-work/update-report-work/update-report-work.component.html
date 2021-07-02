@@ -1,3 +1,4 @@
+<p-toast [baseZIndex]="1000" [style]="{width: 'auto'}"></p-toast>
 <div class="animated fadeIn">
   <div class="card">
     <div class="card-header">
@@ -24,6 +25,9 @@
                        formControlName="phoneCustomer" [class.is-invalid]="requestDTO.controls.phoneCustomer.invalid && (requestDTO.controls.phoneCustomer.dirty || requestDTO.controls.nameCustomer.touched)">
                 <div class="invalid-feedback" *ngIf="requestDTO.controls.phoneCustomer.errors?.required">
                   *Số điện thoại khách hàng không được để trống
+                </div>
+                <div class="invalid-feedback" *ngIf="requestDTO.controls.phoneCustomer.errors?.required">
+                  *Số điện thoại sai định dạng
                 </div>
               </div>
             </div>

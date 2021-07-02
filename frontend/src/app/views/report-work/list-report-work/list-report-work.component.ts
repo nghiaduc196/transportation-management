@@ -26,4 +26,10 @@ export class ListReportWorkComponent implements OnInit {
     });
   }
 
+  paginate($event) {
+  }
+
+  openEdit(data) {}
+
+  delete(data) {}
 }
