@@ -4,14 +4,14 @@ import com.backend.transportmanagemt.domain.ReportWorkersDetail;
 
 public class ReportWorkersDetailResponseDTO {
     private Long id;
-    private UserResponseDTO user;
+    private WorkerResponseDTO user;
 
     public ReportWorkersDetailResponseDTO() {
     }
 
     public ReportWorkersDetailResponseDTO(ReportWorkersDetail workersDetail) {
         this.id = workersDetail.getId();
-        this.user = new UserResponseDTO(workersDetail.getWorker());
+        this.user = new WorkerResponseDTO(workersDetail.getWorker());
     }
 
     public Long getId() {
@@ -22,11 +22,11 @@ public class ReportWorkersDetailResponseDTO {
         this.id = id;
     }
 
-    public UserResponseDTO getUser() {
+    public WorkerResponseDTO getUser() {
         return user;
     }
 
-    public void setUser(UserResponseDTO user) {
+    public void setUser(WorkerResponseDTO user) {
         this.user = user;
     }
 }

@@ -4,6 +4,7 @@ import com.backend.transportmanagemt.domain.ReportWork;
 import com.backend.transportmanagemt.domain.User;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,11 +13,13 @@ public class ReportWorkResponseDTO {
     private String licensePlate;
     private String addressStart;
     private String addressEnd;
+    private String nameCustomer;
     private String phoneCustomer;
     private String description;
     private String images;
     private BigDecimal totalMoney;
     private String userCreated;
+    private Instant createdDate;
     private Set<ReportWorkersDetailResponseDTO> workers;
 
     public ReportWorkResponseDTO(ReportWork reportWork) {
@@ -30,6 +33,8 @@ public class ReportWorkResponseDTO {
         this.totalMoney = reportWork.getTotalMoney();
         this.userCreated = reportWork.getCreatedUser().getFullName();
         this.workers = reportWork.getWorkers().stream().map(ReportWorkersDetailResponseDTO::new).collect(Collectors.toSet());
+        this.createdDate = reportWork.getCreatedDate();
+        this.nameCustomer = reportWork.getNameCustomer();
     }
 
     public Long getId() {
@@ -102,5 +107,29 @@ public class ReportWorkResponseDTO {
 
     public void setWorkers(Set<ReportWorkersDetailResponseDTO> workers) {
         this.workers = workers;
+    }
+
+    public String getUserCreated() {
+        return userCreated;
+    }
+
+    public void setUserCreated(String userCreated) {
+        this.userCreated = userCreated;
+    }
+
+    public Instant getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getNameCustomer() {
+        return nameCustomer;
+    }
+
+    public void setNameCustomer(String nameCustomer) {
+        this.nameCustomer = nameCustomer;
     }
 }

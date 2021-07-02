@@ -11,6 +11,7 @@ public class ReportWorkRequestDTO {
     private String licensePlate;
     private String addressStart;
     private String addressEnd;
+    private String nameCustomer;
     private String phoneCustomer;
     private String description;
     private BigDecimal totalMoney;
@@ -110,6 +111,14 @@ public class ReportWorkRequestDTO {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getNameCustomer() {
+        return nameCustomer;
+    }
+
+    public void setNameCustomer(String nameCustomer) {
+        this.nameCustomer = nameCustomer;
     }
 
     @Override

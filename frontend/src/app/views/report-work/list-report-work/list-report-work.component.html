@@ -25,7 +25,13 @@
           <tbody *ngIf="sortedData.length > 0">
             <tr *ngFor="let report of sortedData; let i = index">
               <th scope="row">{{i + 1}}</th>
-
+              <td> {{report?.nameCustomer}}</td>
+              <td> {{report?.phoneCustomer}}</td>
+              <td> {{report?.addressStart}}</td>
+              <td> {{report?.addressEnd}}</td>
+              <td> {{report?.totalMoney | currency: 'VND'}}</td>
+              <td> {{report?.createdDate | date: 'dd/MM/yyyy'}}</td>
+              <td> {{report?.userCreated }}</td>
               <th class="overflow-hidden">
                 <div ngbDropdown container="body">
                   <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle><i class="fa fa-angle-double-down"></i></button>

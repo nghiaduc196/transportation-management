@@ -135,6 +135,6 @@ jhipster:
 # ===================================================================
 
 application:
-  link-config: /usr/local/pimpim/firebase-config
-  base-dir: /usr/local/pimpim/data
+  link-config: /usr/local/transportmanagement/firebase-config
+  base-dir: /usr/local/transportmanagement/data
   base-url: https://media.vcna.top

@@ -20,15 +20,15 @@ export class ReportWorkService {
     return this.http.post<any>(this.SERVER_API_URL + 'report-work', body, { observe: 'response' });
   }
 
-  update(body): Observable<any> {
-    return this.http.put<any>(this.SERVER_API_URL + 'position', body, { observe: 'response' });
-  }
-
-  changeStatus(body): Observable<any> {
-    return this.http.put<any>(this.SERVER_API_URL + 'position/update-status', body, { observe: 'response' });
-  }
-
-  delete(id: any): Observable<any> {
-    return this.http.delete(`${this.SERVER_API_URL + 'position/'}${id}`, { observe: 'response' });
-  }
+  // update(body): Observable<any> {
+  //   return this.http.put<any>(this.SERVER_API_URL + 'position', body, { observe: 'response' });
+  // }
+  //
+  // changeStatus(body): Observable<any> {
+  //   return this.http.put<any>(this.SERVER_API_URL + 'position/update-status', body, { observe: 'response' });
+  // }
+  //
+  // delete(id: any): Observable<any> {
+  //   return this.http.delete(`${this.SERVER_API_URL + 'position/'}${id}`, { observe: 'response' });
+  // }
 }

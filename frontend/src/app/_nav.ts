@@ -78,7 +78,7 @@ export const navItems: NavData[] = [
     name: 'Báo cáo',
     url: '/report-work',
     icon: 'fa fa-list',
-    authorities: [ROLE.ADMIN],
+    authorities: [ROLE.ADMIN, ROLE.USER],
     children: [
       {
         name: 'Danh sách báo cáo',

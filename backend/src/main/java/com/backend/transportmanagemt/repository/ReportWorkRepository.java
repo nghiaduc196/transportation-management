@@ -14,5 +14,9 @@ import java.util.List;
 @Repository
 public interface ReportWorkRepository extends JpaRepository<ReportWork, Long> {
     @Query(value = "SELECT rw FROM ReportWork rw")
-    Page<ReportWork> filter(Pageable pageable);
+    Page<ReportWork> filterForAdmin(Pageable pageable);
+
+    @Query(value = "SELECT rw FROM ReportWork rw where 1 = 1" +
+        "And rw.createdUser.login = :login")
+    Page<ReportWork> filterForUser(@Param("login")String login, Pageable pageable);
 }

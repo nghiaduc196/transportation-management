@@ -1,6 +1,7 @@
 package com.backend.transportmanagemt.service;
 
 import com.backend.transportmanagemt.config.ApplicationProperties;
+import com.backend.transportmanagemt.domain.Authority;
 import com.backend.transportmanagemt.domain.ReportWork;
 import com.backend.transportmanagemt.domain.ReportWorkersDetail;
 import com.backend.transportmanagemt.domain.User;
@@ -82,6 +83,7 @@ public class ReportWorkService {
         reportWork.setDescription(requestDTO.getDescription());
         reportWork.setPhoneCustomer(requestDTO.getPhoneCustomer());
         reportWork.setLicensePlate(requestDTO.getLicensePlate());
+        reportWork.setNameCustomer(requestDTO.getNameCustomer());
         reportWork.setTotalMoney(requestDTO.getTotalMoney());
         Set<ReportWorkersDetail> workersDetails = new HashSet<>();
         for(Long item: requestDTO.getWorkersDetailRequestDTOS()) {
@@ -105,6 +107,7 @@ public class ReportWorkService {
 
     public Page<ReportWork> filter(ReportWorkRequestDTO requestDTO, Pageable pageable) {
         log.debug("call filter method {}", requestDTO);
+        Boolean isAdmin = false;
         Instant startDate = null;
         Instant endDate = null;
         Calendar calendar = Calendar.getInstance();
@@ -117,6 +120,16 @@ public class ReportWorkService {
             calendar.add(Calendar.DATE, 1);
             endDate =  calendar.getTime().toInstant();
         }
-        return reportWorkRepository.filter(pageable);
+        User user = userService.getUserWithAuthorities().orElse(null);
+        for (Authority authority: user.getAuthorities()) {
+            if (authority.equals("ROLE_ADMIN")) {
+                isAdmin = true;
+            }
+        }
+        if (isAdmin) {
+            return reportWorkRepository.filterForAdmin(pageable);
+        } else  {
+            return reportWorkRepository.filterForUser(user.getLogin(),pageable);
+        }
     }
 }

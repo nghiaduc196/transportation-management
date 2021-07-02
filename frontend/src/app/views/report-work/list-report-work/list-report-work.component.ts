@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ReportWorkService} from '../../../core/services/report-work.service';
 
 @Component({
   selector: 'app-list-report-work',
@@ -12,9 +13,17 @@ export class ListReportWorkComponent implements OnInit {
   pageSize = 10;
   pageIndex = 0;
 
-  constructor() { }
+  constructor(private reportWorkService: ReportWorkService) { }
 
   ngOnInit(): void {
+    this.getListReportWork();
+  }
+
+  getListReportWork() {
+    this.reportWorkService.getAll().subscribe(res => {
+      this.sortedData = res.body;
+      console.log(res);
+    });
   }
 
 }
