@@ -59,6 +59,7 @@ export class UserUpdateComponent implements OnInit {
     this.route.data.subscribe(({ user }) => {
       if (user) {
         this.user = user;
+        console.log(user);
         this.requestDTO.controls.id.setValue(user.id);
         this.requestDTO.controls.login.setValue(user.login);
         if (user.position) {

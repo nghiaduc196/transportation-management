@@ -55,7 +55,7 @@ public class UserDTO {
     private Ward ward;
     private String phone;
     private String address;
-
+    private String fullName;
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -82,6 +82,7 @@ public class UserDTO {
         this.ward = user.getWard();
         this.phone = user.getPhoneNumber();
         this.address = user.getAddress();
+        this.fullName = user.getFullName();
     }
 
     public Long getId() {
@@ -234,6 +235,14 @@ public class UserDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     // prettier-ignore
