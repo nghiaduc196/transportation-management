@@ -122,10 +122,12 @@ public class ReportWorkService {
         }
         User user = userService.getUserWithAuthorities().orElse(null);
         for (Authority authority: user.getAuthorities()) {
-            if (authority.equals("ROLE_ADMIN")) {
+            if (authority.getName().equals("ROLE_ADMIN")) {
                 isAdmin = true;
             }
         }
+        System.out.println("================================");
+        System.out.println(isAdmin);
         if (isAdmin) {
             return reportWorkRepository.filterForAdmin(pageable);
         } else  {
