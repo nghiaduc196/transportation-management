@@ -11,6 +11,7 @@ import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {NgxCurrencyModule} from 'ngx-currency';
+import {CalendarModule} from 'primeng/calendar';
 
 
 
@@ -29,7 +30,8 @@ import {NgxCurrencyModule} from 'ngx-currency';
         ButtonModule,
         RippleModule,
         NgSelectModule,
-        NgxCurrencyModule
+        NgxCurrencyModule,
+        CalendarModule
     ]
 })
 export class ReportWorkModule { }

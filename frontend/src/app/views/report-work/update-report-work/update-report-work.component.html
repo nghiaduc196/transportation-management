@@ -22,7 +22,7 @@
               <label class="col-md-3 col-form-label">Số điện thoại Khách hàng</label>
               <div class="col-md-9">
                 <input class="form-control" type="text" placeholder="Số điện thoại khách hàng"
-                       formControlName="phoneCustomer" [class.is-invalid]="requestDTO.controls.phoneCustomer.invalid && (requestDTO.controls.phoneCustomer.dirty || requestDTO.controls.nameCustomer.touched)">
+                       formControlName="phoneCustomer" [class.is-invalid]="requestDTO.controls.phoneCustomer.invalid && (requestDTO.controls.phoneCustomer.dirty || requestDTO.controls.phoneCustomer.touched)">
                 <div class="invalid-feedback" *ngIf="requestDTO.controls.phoneCustomer.errors?.required">
                   *Số điện thoại khách hàng không được để trống
                 </div>
@@ -80,9 +80,17 @@
                 <textarea rows="3" type="text" class="form-control" formControlName="description"></textarea>
               </div>
             </div>
+
+<!--            <div class="form-group row">-->
+<!--              <label class="col-md-3 col-form-label">Ngày thực hiện </label>-->
+<!--              <div class="col-md-9">-->
+<!--                <p-calendar inputId="basic" ></p-calendar>-->
+<!--              </div>-->
+<!--            </div>-->
+
           </form>
           <div class="form-group row mb-4">
-            <label class="col-md-3 col-form-label">Người cùng thực hiện công việc </label>
+            <label class="col-md-3 col-form-label">Người thực hiện công việc </label>
             <div class="col-md-9">
               <ng-select [items]="listWorkers" bindLabel="fullName" bindValue="id" [multiple]="true"
                          placeholder="Lựa chọn người thực hiện cùng" [(ngModel)]="selectedWorkerIds">

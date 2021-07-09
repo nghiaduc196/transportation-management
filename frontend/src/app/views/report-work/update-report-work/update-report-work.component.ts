@@ -23,6 +23,7 @@ export class UpdateReportWorkComponent implements OnInit {
     description: [null, Validators.required],
     totalMoney: [null, Validators.required],
     licensePlate: [null, Validators.required],
+    date: [null, Validators.required],
     workersDetailRequestDTOS: [null, Validators.required]
   });
   listOldImage = [];

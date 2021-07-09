@@ -12,7 +12,7 @@ export class ListReportWorkComponent implements OnInit {
   pageSizeOption = [5, 10, 20];
   pageSize = 10;
   pageIndex = 0;
-
+  sort = 'createdDate,desc';
   constructor(private reportWorkService: ReportWorkService) { }
 
   ngOnInit(): void {
@@ -20,8 +20,14 @@ export class ListReportWorkComponent implements OnInit {
   }
 
   getListReportWork() {
-    this.reportWorkService.getAll().subscribe(res => {
+    const param = {
+      page: this.pageIndex,
+      size: this.pageSize,
+      sort: this.sort
+    };
+    this.reportWorkService.getAll(param).subscribe(res => {
       this.sortedData = res.body;
+      this.totalData = res.headers.get('X-Total-Count');
       console.log(res);
     });
   }

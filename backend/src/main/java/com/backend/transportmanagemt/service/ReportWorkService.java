@@ -7,7 +7,6 @@ import com.backend.transportmanagemt.domain.ReportWorkersDetail;
 import com.backend.transportmanagemt.domain.User;
 import com.backend.transportmanagemt.repository.ReportWorkRepository;
 import com.backend.transportmanagemt.service.dto.ReportWorkRequestDTO;
-import com.backend.transportmanagemt.service.dto.ReportWorkersDetailRequestDTO;
 import com.backend.transportmanagemt.web.rest.errors.StorageException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,7 +17,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
