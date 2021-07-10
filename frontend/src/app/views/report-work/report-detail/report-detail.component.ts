@@ -8,16 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class ReportDetailComponent implements OnInit {
   responsiveOptions = [
     {
-      breakpoint: '1024px',
-      numVisible: 3,
-      numScroll: 3
-    },
-    {
-      breakpoint: '768px',
-      numVisible: 2,
-      numScroll: 2
-    },
-    {
       breakpoint: '560px',
       numVisible: 1,
       numScroll: 1
@@ -25,6 +15,8 @@ export class ReportDetailComponent implements OnInit {
   ];
   products = [
     'https://primefaces.org/primeng/showcase/assets/showcase/images/demo/product/bracelet.jpg',
+    'https://img.nhandan.com.vn/Files/Images/2020/07/26/giai_thuong_lon-1595747403778.jpg',
+    'https://img.nhandan.com.vn/Files/Images/2020/07/26/nhat_nhiep_anh_gia-1595747471173.jpg',
     'https://primefaces.org/primeng/showcase/assets/showcase/images/demo/product/bracelet.jpg'
   ];
   constructor() { }

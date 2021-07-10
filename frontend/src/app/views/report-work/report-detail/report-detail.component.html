@@ -2,20 +2,53 @@
   <div class="card">
     <div class="card-header">
       <i class="fa fa-align-justify"></i>
-      <h5 class="card-header-text d-inline-block">Chi tiết báo cáo </h5>
+      <h5 class="card-header-text d-inline-block">Chi tiết báo cáo ngày 12/07/2021</h5>
     </div>
     <div class="card-body">
       <div class="row">
         <div class="col-12 col-md-6">
-          <p-carousel [value]="products" [numVisible]="1" [numScroll]="1" [circular]="false" [responsiveOptions]="responsiveOptions">
-            <ng-template pTemplate="header">
-              <h5>Basic</h5>
-            </ng-template>
+          <div class="row">
+            <div class="col-12">
+              <p>Tên khách hàng : Nguyễn Chính Nghĩa</p>
+              <p>Số điện thoại : 0983567696</p>
+              <p>Ngày thực hiện : 12/07/2021</p>
+              <p>Địa điểm đi : Nguyễn Chính Nghĩa</p>
+              <p>Địa điểm kết thúc : Nguyễn Chính Nghĩa</p>
+              <p>Tổng tiền: đ20.000.000</p>
+            </div>
+            <hr>
+            <div class="col-12">
+              <p>Nhân viên thực hiện</p>
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                  <tr style="white-space: nowrap">
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên nhân viên</th>
+                    <th scope="col">Chức vụ</th>
+                    <th scope="col">Điện thoại</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td> Nguyễn Văn A</td>
+                    <td> Nguyễn Văn A</td>
+                    <td> Nguyễn Văn A</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <p-carousel [value]="products" [numVisible]="1" [numScroll]="1"  [responsiveOptions]="responsiveOptions">
             <ng-template let-product pTemplate="item">
               <div class="product-item">
                 <div class="product-item-content">
                   <div class="p-mb-3">
-                    <img src="{{product}}" [alt]="product.name" class="product-image" />
+                    <img src="{{product}}" [alt]="product.name" class="product-image"/>
                   </div>
                 </div>
               </div>

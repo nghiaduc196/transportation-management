@@ -14,6 +14,7 @@ import {NgxCurrencyModule} from 'ngx-currency';
 import {CalendarModule} from 'primeng/calendar';
 import { ReportDetailComponent } from './report-detail/report-detail.component';
 import {CarouselModule} from 'primeng/carousel';
+import {InputTextModule} from 'primeng/inputtext';
 
 
 
@@ -35,7 +36,8 @@ import {CarouselModule} from 'primeng/carousel';
         NgSelectModule,
         NgxCurrencyModule,
         CalendarModule,
-        CarouselModule
+        CarouselModule,
+        InputTextModule
     ]
 })
 export class ReportWorkModule { }

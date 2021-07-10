@@ -34,6 +34,7 @@
             <th scope="col">Địa điểm kết thúc</th>
             <th scope="col">Tổng tiền</th>
             <th scope="col">Ngày thực hiện</th>
+            <th scope="col">Ảnh</th>
             <th scope="col">Người tạo</th>
             <th scope="col">#</th>
           </tr>
@@ -47,12 +48,16 @@
               <td> {{report?.addressEnd}}</td>
               <td> {{report?.totalMoney | currency: 'VND'}}</td>
               <td> {{report?.implementationDate | date: 'dd/MM/yyyy'}}</td>
+              <td>
+                <img *ngIf="report.images !== null" style="max-width: 100px;max-height: 100px"
+                     src="{{ report?.images[0] }}" alt="image" />
+              </td>
               <td> {{report?.userCreated }}</td>
               <th class="overflow-hidden">
                 <div ngbDropdown container="body">
                   <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle><i class="fa fa-angle-double-down"></i></button>
                   <div ngbDropdownMenu>
-                    <button ngbDropdownItem (click)="openEdit(report)"><i class="fa fa-edit"></i>Sửa</button>
+                    <button ngbDropdownItem routerLink="/report-work/1/detail"><i class="fa fa-eye"></i>Xem</button>
                     <button ngbDropdownItem (click)="delete(report)"><i class="fa fa-trash"></i>Xóa</button>
                   </div>
                 </div>

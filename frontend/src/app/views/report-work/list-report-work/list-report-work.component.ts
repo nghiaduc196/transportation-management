@@ -27,8 +27,13 @@ export class ListReportWorkComponent implements OnInit {
     };
     this.reportWorkService.getAll(param).subscribe(res => {
       this.sortedData = res.body;
+      for (let i = 0; i < this.sortedData.length; i++) {
+        if (this.sortedData[i].images) {
+          this.sortedData[i].images = JSON.parse(this.sortedData[i].images);
+        }
+      }
+      console.log(this.sortedData);
       this.totalData = res.headers.get('X-Total-Count');
-      console.log(res);
     });
   }
 

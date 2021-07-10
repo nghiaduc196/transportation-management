@@ -12,7 +12,7 @@
               <label class="col-md-3 col-form-label" for="login">Tên Khách hàng</label>
               <div class="col-md-9">
                 <input class="form-control" id="login" type="text" placeholder="Tên khách hàng"
-                       formControlName="nameCustomer" [class.is-invalid]="requestDTO.controls.nameCustomer.invalid && (requestDTO.controls.nameCustomer.dirty || requestDTO.controls.nameCustomer.touched)">
+                       formControlName="nameCustomer" [class.is-invalid]="requestDTO.controls.nameCustomer.invalid && (requestDTO.controls.nameCustomer.dirty || requestDTO.controls.nameCustomer.touched)" autocomplete="off">
                 <div class="invalid-feedback" *ngIf="requestDTO.controls.nameCustomer.errors?.required">
                   *Tên khách hàng không được để trống
                 </div>
@@ -22,7 +22,7 @@
               <label class="col-md-3 col-form-label">Số điện thoại Khách hàng</label>
               <div class="col-md-9">
                 <input class="form-control" type="text" placeholder="Số điện thoại khách hàng"
-                       formControlName="phoneCustomer" [class.is-invalid]="requestDTO.controls.phoneCustomer.invalid && (requestDTO.controls.phoneCustomer.dirty || requestDTO.controls.phoneCustomer.touched)">
+                       formControlName="phoneCustomer" [class.is-invalid]="requestDTO.controls.phoneCustomer.invalid && (requestDTO.controls.phoneCustomer.dirty || requestDTO.controls.phoneCustomer.touched)" autocomplete="off">
                 <div class="invalid-feedback" *ngIf="requestDTO.controls.phoneCustomer.errors?.required">
                   *Số điện thoại khách hàng không được để trống
                 </div>
@@ -35,7 +35,7 @@
               <label class="col-md-3 col-form-label">Địa chỉ đi</label>
               <div class="col-md-9">
                 <input class="form-control" type="text" placeholder="Địa chỉ đi"
-                       formControlName="addressStart" [class.is-invalid]="requestDTO.controls.addressStart.invalid && (requestDTO.controls.addressStart.dirty || requestDTO.controls.addressStart.touched)">
+                       formControlName="addressStart" [class.is-invalid]="requestDTO.controls.addressStart.invalid && (requestDTO.controls.addressStart.dirty || requestDTO.controls.addressStart.touched)" autocomplete="off">
                 <div class="invalid-feedback" *ngIf="requestDTO.controls.addressStart.errors?.required">
                   *Địa chỉ đi không được để trống
                 </div>
@@ -46,7 +46,7 @@
               <label class="col-md-3 col-form-label">Địa chỉ đến</label>
               <div class="col-md-9">
                 <input class="form-control" type="text" placeholder="Địa chỉ đến"
-                       formControlName="addressEnd" [class.is-invalid]="requestDTO.controls.addressEnd.invalid && (requestDTO.controls.addressEnd.dirty || requestDTO.controls.addressEnd.touched)">
+                       formControlName="addressEnd" [class.is-invalid]="requestDTO.controls.addressEnd.invalid && (requestDTO.controls.addressEnd.dirty || requestDTO.controls.addressEnd.touched)" autocomplete="off">
                 <div class="invalid-feedback" *ngIf="requestDTO.controls.addressEnd.errors?.required">
                   *Địa chỉ điến không được để trống
                 </div>
@@ -57,7 +57,7 @@
               <label class="col-md-3 col-form-label">Biển số xe</label>
               <div class="col-md-9">
                 <input class="form-control" type="text" placeholder="Biển số xe"
-                       formControlName="licensePlate" [class.is-invalid]="requestDTO.controls.licensePlate.invalid && (requestDTO.controls.licensePlate.dirty || requestDTO.controls.licensePlate.touched)">
+                       formControlName="licensePlate" [class.is-invalid]="requestDTO.controls.licensePlate.invalid && (requestDTO.controls.licensePlate.dirty || requestDTO.controls.licensePlate.touched)" autocomplete="off">
                 <div class="invalid-feedback" *ngIf="requestDTO.controls.licensePlate.errors?.required">
                   *Biển số xe không được để trống
                 </div>
@@ -68,7 +68,7 @@
               <label class="col-md-3 col-form-label">Tổng Tiền</label>
               <div class="col-md-9">
                 <input currencyMask class="form-control" type="tel" placeholder="Tổng Tiền"
-                       formControlName="totalMoney" [class.is-invalid]="requestDTO.controls.totalMoney.invalid && (requestDTO.controls.totalMoney.dirty || requestDTO.controls.totalMoney.touched)">
+                       formControlName="totalMoney" [class.is-invalid]="requestDTO.controls.totalMoney.invalid && (requestDTO.controls.totalMoney.dirty || requestDTO.controls.totalMoney.touched)" autocomplete="off">
                 <div class="invalid-feedback" *ngIf="requestDTO.controls.totalMoney.errors?.required">
                   *Tổng tiền không được để trống
                 </div>
@@ -77,7 +77,7 @@
             <div class="form-group row">
               <label class="col-md-3 col-form-label">Nội dung công việc </label>
               <div class="col-md-9">
-                <textarea rows="3" type="text" class="form-control" formControlName="description"></textarea>
+                <textarea rows="3" type="text" class="form-control" formControlName="description" placeholder="Nhập nội dung công việc" autocomplete="off"></textarea>
               </div>
             </div>
 
