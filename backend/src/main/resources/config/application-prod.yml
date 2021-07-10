@@ -135,6 +135,6 @@ jhipster:
 # ===================================================================
 
 application:
-  link-config: /usr/local/transportmanagement/firebase-config
-  base-dir: /usr/local/transportmanagement/data
+  link-config: /usr/local/transport/firebase-config
+  base-dir: /usr/local/transport/data
   base-url: https://media.vcna.top
