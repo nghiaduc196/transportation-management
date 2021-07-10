@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {UserService} from '../../../core/services/user.service';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 import {ReportWorkService} from '../../../core/services/report-work.service';
 import {Router} from '@angular/router';
 import {MessageService} from 'primeng/api';
@@ -23,7 +24,7 @@ export class UpdateReportWorkComponent implements OnInit {
     description: [null, Validators.required],
     totalMoney: [null, Validators.required],
     licensePlate: [null, Validators.required],
-    date: [null, Validators.required],
+    implementationDate: [null, Validators.required],
     workersDetailRequestDTOS: [null, Validators.required]
   });
   listOldImage = [];
@@ -32,6 +33,7 @@ export class UpdateReportWorkComponent implements OnInit {
   isPickedImage = false;
   listWorkers = [];
   selectedWorkerIds = [];
+  pickTime = new FormControl(null);
   constructor(private fb: FormBuilder, private userService: UserService,
               private reportWorkService: ReportWorkService,
               private router: Router,
@@ -82,10 +84,12 @@ export class UpdateReportWorkComponent implements OnInit {
   }
 
   create(): void {
+    const timeCreate = moment(this.pickTime.value).format('yyyy-MM-DD');
+    this.requestDTO.controls.implementationDate.setValue(timeCreate);
     this.requestDTO.controls.workersDetailRequestDTOS.setValue(this.selectedWorkerIds);
     if (!this.requestDTO.valid) {
       this.messageService.add({severity: 'warn', summary: 'Cảnh báo', detail: 'Vui lòng nhập hết các thông tin'});
-    } else  {
+    } else {
       const data = _.omitBy(this.requestDTO.value, _.isNil);
       console.log(data);
       const reportWork = new FormData();

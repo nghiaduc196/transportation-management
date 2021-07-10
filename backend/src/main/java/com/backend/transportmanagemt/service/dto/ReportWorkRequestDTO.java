@@ -18,6 +18,8 @@ public class ReportWorkRequestDTO {
     private Set<Long> workersDetailRequestDTOS;
     private Set<ReportWorkersDetailRequestDTO> workersDetailDeleteRequestDTOS;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date implementationDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
@@ -119,6 +121,14 @@ public class ReportWorkRequestDTO {
 
     public void setNameCustomer(String nameCustomer) {
         this.nameCustomer = nameCustomer;
+    }
+
+    public Date getImplementationDate() {
+        return implementationDate;
+    }
+
+    public void setImplementationDate(Date implementationDate) {
+        this.implementationDate = implementationDate;
     }
 
     @Override

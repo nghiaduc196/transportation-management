@@ -12,13 +12,16 @@ import {RippleModule} from 'primeng/ripple';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {NgxCurrencyModule} from 'ngx-currency';
 import {CalendarModule} from 'primeng/calendar';
+import { ReportDetailComponent } from './report-detail/report-detail.component';
+import {CarouselModule} from 'primeng/carousel';
 
 
 
 @NgModule({
   declarations: [
     UpdateReportWorkComponent,
-    ListReportWorkComponent
+    ListReportWorkComponent,
+    ReportDetailComponent
   ],
     imports: [
         CommonModule,
@@ -31,7 +34,8 @@ import {CalendarModule} from 'primeng/calendar';
         RippleModule,
         NgSelectModule,
         NgxCurrencyModule,
-        CalendarModule
+        CalendarModule,
+        CarouselModule
     ]
 })
 export class ReportWorkModule { }

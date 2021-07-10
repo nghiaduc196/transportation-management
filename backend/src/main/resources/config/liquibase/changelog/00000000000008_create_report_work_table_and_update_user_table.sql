@@ -6,5 +6,6 @@ create table report_workers_detail (id bigint not null auto_increment, created_b
 alter table report_work add constraint FKmg2y1d4qdd41hwws6s3h8kh73 foreign key (user_id) references jhi_user (id);
 alter table report_workers_detail add constraint FKq05bcb519ow0e787svlpfdd1k foreign key (report_id) references report_work (id);
 alter table report_workers_detail add constraint FKtnedemj38utukkdr1yij9g765 foreign key (user_id) references jhi_user (id);
+alter table report_work add column implementation_date datetime(6);
 
 

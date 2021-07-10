@@ -18,6 +18,7 @@ public class ReportWorkResponseDTO {
     private String description;
     private String images;
     private BigDecimal totalMoney;
+    private Instant implementationDate;
     private String userCreated;
     private Instant createdDate;
     private Set<ReportWorkersDetailResponseDTO> workers;
@@ -32,6 +33,7 @@ public class ReportWorkResponseDTO {
         this.images = reportWork.getImages();
         this.totalMoney = reportWork.getTotalMoney();
         this.userCreated = reportWork.getCreatedUser().getFullName();
+        this.implementationDate = reportWork.getImplementationDate();
         this.workers = reportWork.getWorkers().stream().map(ReportWorkersDetailResponseDTO::new).collect(Collectors.toSet());
         this.createdDate = reportWork.getCreatedDate();
         this.nameCustomer = reportWork.getNameCustomer();
@@ -132,4 +134,13 @@ public class ReportWorkResponseDTO {
     public void setNameCustomer(String nameCustomer) {
         this.nameCustomer = nameCustomer;
     }
+
+    public Instant getImplementationDate() {
+        return implementationDate;
+    }
+
+    public void setImplementationDate(Instant implementationDate) {
+        this.implementationDate = implementationDate;
+    }
 }
+

@@ -3,6 +3,7 @@ package com.backend.transportmanagemt.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Set;
 
 @Entity
@@ -35,6 +36,9 @@ public class ReportWork extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "total_money")
     private BigDecimal totalMoney;
+
+    @Column(name = "implementation_date")
+    private Instant implementationDate;
 
     @Lob
     @Column(name = "description")
@@ -137,5 +141,13 @@ public class ReportWork extends AbstractAuditingEntity implements Serializable {
 
     public void setNameCustomer(String nameCustomer) {
         this.nameCustomer = nameCustomer;
+    }
+
+    public Instant getImplementationDate() {
+        return implementationDate;
+    }
+
+    public void setImplementationDate(Instant implementationDate) {
+        this.implementationDate = implementationDate;
     }
 }

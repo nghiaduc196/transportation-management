@@ -33,7 +33,7 @@
             <th scope="col">Địa điểm đi</th>
             <th scope="col">Địa điểm kết thúc</th>
             <th scope="col">Tổng tiền</th>
-            <th scope="col">Ngày báo cáo</th>
+            <th scope="col">Ngày thực hiện</th>
             <th scope="col">Người tạo</th>
             <th scope="col">#</th>
           </tr>
@@ -46,7 +46,7 @@
               <td> {{report?.addressStart}}</td>
               <td> {{report?.addressEnd}}</td>
               <td> {{report?.totalMoney | currency: 'VND'}}</td>
-              <td> {{report?.createdDate | date: 'dd/MM/yyyy'}}</td>
+              <td> {{report?.implementationDate | date: 'dd/MM/yyyy'}}</td>
               <td> {{report?.userCreated }}</td>
               <th class="overflow-hidden">
                 <div ngbDropdown container="body">
