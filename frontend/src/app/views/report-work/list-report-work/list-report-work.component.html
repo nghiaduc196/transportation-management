@@ -57,7 +57,7 @@
                 <div ngbDropdown container="body">
                   <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle><i class="fa fa-angle-double-down"></i></button>
                   <div ngbDropdownMenu>
-                    <button ngbDropdownItem routerLink="/report-work/1/detail"><i class="fa fa-eye"></i>Xem</button>
+                    <button ngbDropdownItem routerLink="/report-work/{{report.id}}/detail"><i class="fa fa-eye"></i>Xem</button>
                     <button ngbDropdownItem (click)="delete(report)"><i class="fa fa-trash"></i>Xóa</button>
                   </div>
                 </div>

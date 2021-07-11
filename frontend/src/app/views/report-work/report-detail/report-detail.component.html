@@ -2,39 +2,38 @@
   <div class="card">
     <div class="card-header">
       <i class="fa fa-align-justify"></i>
-      <h5 class="card-header-text d-inline-block">Chi tiết báo cáo ngày 12/07/2021</h5>
+      <h5 class="card-header-text d-inline-block">Chi tiết báo cáo ngày {{detailReport.createdDate | date: 'dd/MM/yyyy'}} </h5>
     </div>
     <div class="card-body">
       <div class="row">
         <div class="col-12 col-md-6">
           <div class="row">
             <div class="col-12">
-              <p>Tên khách hàng : Nguyễn Chính Nghĩa</p>
-              <p>Số điện thoại : 0983567696</p>
-              <p>Ngày thực hiện : 12/07/2021</p>
-              <p>Địa điểm đi : Nguyễn Chính Nghĩa</p>
-              <p>Địa điểm kết thúc : Nguyễn Chính Nghĩa</p>
-              <p>Tổng tiền: đ20.000.000</p>
+              <h6 class="mb-2">Tên khách hàng : <strong> {{detailReport?.nameCustomer}} </strong></h6>
+              <h6 class="mb-2">Số điện thoại : <strong> {{detailReport?.phoneCustomer}} </strong> </h6>
+              <h6 class="mb-2">Ngày thực hiện : <strong> {{detailReport?.implementationDate | date: 'dd/MM/yyyy'}} </strong> </h6>
+              <h6 class="mb-2">Địa điểm đi : <strong> {{detailReport?.addressStart}} </strong> </h6>
+              <h6 class="mb-2">Địa điểm kết thúc : <strong> {{detailReport?.addressEnd}} </strong> </h6>
+              <h6 class="mb-2">Tổng tiền: <strong> {{detailReport?.totalMoney | currency: 'VND'}} </strong> </h6>
+              <h6 class="mb-2">Nội dung thực hiện: <strong> {{detailReport?.description}} </strong></h6>
             </div>
             <hr>
-            <div class="col-12">
-              <p>Nhân viên thực hiện</p>
+            <div class="col-12 mt-2">
+              <h6>Nhân viên thực hiện</h6>
               <div class="table-responsive">
                 <table class="table table-bordered">
                   <thead>
                   <tr style="white-space: nowrap">
                     <th scope="col">STT</th>
                     <th scope="col">Tên nhân viên</th>
-                    <th scope="col">Chức vụ</th>
                     <th scope="col">Điện thoại</th>
                   </tr>
                   </thead>
-                  <tbody>
+                  <tbody *ngFor="let worker of detailReport.workers; let i = index">
                   <tr>
                     <th scope="row">1</th>
-                    <td> Nguyễn Văn A</td>
-                    <td> Nguyễn Văn A</td>
-                    <td> Nguyễn Văn A</td>
+                    <td> {{worker?.user?.fullName}} </td>
+                    <td> {{worker?.user?.phone}}</td>
                   </tr>
                   </tbody>
                 </table>
@@ -43,7 +42,7 @@
           </div>
         </div>
         <div class="col-12 col-md-6">
-          <p-carousel [value]="products" [numVisible]="1" [numScroll]="1"  [responsiveOptions]="responsiveOptions">
+          <p-carousel [value]="detailReport.images" [numVisible]="1" [numScroll]="1"  [responsiveOptions]="responsiveOptions">
             <ng-template let-product pTemplate="item">
               <div class="product-item">
                 <div class="product-item-content">

@@ -1,10 +1,7 @@
 package com.backend.transportmanagemt.service;
 
 import com.backend.transportmanagemt.config.ApplicationProperties;
-import com.backend.transportmanagemt.domain.Authority;
-import com.backend.transportmanagemt.domain.ReportWork;
-import com.backend.transportmanagemt.domain.ReportWorkersDetail;
-import com.backend.transportmanagemt.domain.User;
+import com.backend.transportmanagemt.domain.*;
 import com.backend.transportmanagemt.repository.ReportWorkRepository;
 import com.backend.transportmanagemt.service.dto.ReportWorkRequestDTO;
 import com.backend.transportmanagemt.web.rest.errors.StorageException;
@@ -132,5 +129,12 @@ public class ReportWorkService {
         } else  {
             return reportWorkRepository.filterForUser(user.getLogin(),pageable);
         }
+    }
+
+    public Optional<ReportWork> findById(Long id) {
+        if (id == null) {
+            return Optional.empty();
+        }
+        return reportWorkRepository.findById(id);
     }
 }

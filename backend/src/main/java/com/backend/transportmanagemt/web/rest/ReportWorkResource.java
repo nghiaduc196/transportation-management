@@ -6,6 +6,7 @@ import com.backend.transportmanagemt.service.dto.ReportWorkResponseDTO;
 import com.backend.transportmanagemt.web.rest.errors.BadRequestAlertException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.github.jhipster.web.util.PaginationUtil;
+import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,13 @@ public class ReportWorkResource {
         final Page<ReportWorkResponseDTO> page = reportWorkService.filter(requestDTO, pageable).map(ReportWorkResponseDTO::new);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/report-work/{id}")
+    public ResponseEntity<ReportWorkResponseDTO> getById(@PathVariable Long id) {
+        log.debug("REST request to get report : {}", id);
+        return ResponseUtil.wrapOrNotFound(
+            reportWorkService.findById(id)
+                .map(ReportWorkResponseDTO::new));
     }
 }

@@ -20,6 +20,12 @@ export class ReportWorkService {
     return this.http.post<any>(this.SERVER_API_URL + 'report-work', body, { observe: 'response' });
   }
 
+  getReportById(id?): Observable<HttpResponse<any>> {
+    return this.http.get<any>(this.SERVER_API_URL + 'report-work/' + id, {
+      observe: 'response',
+    });
+  }
+
   // update(body): Observable<any> {
   //   return this.http.put<any>(this.SERVER_API_URL + 'position', body, { observe: 'response' });
   // }
