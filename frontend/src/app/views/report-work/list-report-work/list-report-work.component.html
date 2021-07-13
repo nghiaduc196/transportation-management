@@ -1,21 +1,4 @@
 <div class="animated fadeIn">
-<!--  <p-toast [baseZIndex]="1000" [style]="{width: 'auto'}"></p-toast>-->
-<!--  <div class="row">-->
-<!--    <div class="col-md-4 col-12">-->
-<!--      <label>Basic</label>-->
-<!--      <p-calendar inputId="basic" [(ngModel)]="date1"></p-calendar>-->
-<!--    </div>-->
-<!--    <div class="col-md-4 col-12">-->
-<!--      <label>Basic</label>-->
-<!--      <p-calendar inputId="basic" [(ngModel)]="date1"></p-calendar>-->
-<!--    </div>-->
-<!--    <div class="col-md-4 col-12">-->
-<!--      <label>Basic</label>-->
-<!--      <p-calendar inputId="basic" [(ngModel)]="date1"></p-calendar>-->
-<!--    </div>-->
-<!--  </div>-->
-
-
   <div class="card">
     <div class="card-header">
       <i class="fa fa-align-justify"></i>
@@ -23,6 +6,25 @@
       <button  class="btn btn-success float-right" routerLink="/report-work/create">Tạo báo cáo</button>
     </div>
     <div class="card-body">
+      <div class="row mt-2">
+        <div class="col-md-4 mt-3 mb-3">
+          <span class="p-float-label">
+            <p-calendar [formControl]="createdDates" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" dateFormat="dd/mm/yy" selectionMode="range" [readonlyInput]="true" inputId="range1" placeholder="Chọn khoảng thời gian báo cáo"></p-calendar>
+          </span>
+        </div>
+        <div class="col-md-4 mt-3 mb-3">
+          <span class="p-float-label">
+            <p-calendar [formControl]="implementationDates" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" dateFormat="dd/mm/yy" selectionMode="range" [readonlyInput]="true" inputId="range2" placeholder="Chọn khoảng thời thực hiện công việc"></p-calendar>
+          </span>
+        </div>
+        <div class="col-md-4 mt-3 mb-3">
+          <span class="p-float-label">
+            <input id="float-input" type="text" style="width: 100%" pInputText [formControl]="name">
+           <label for="float-input">Tìm kiếm theo tên hoặc sđt</label>
+          </span>
+        </div>
+      </div>
+
       <div class="table-responsive">
         <table class="table table-bordered">
           <thead>
@@ -66,7 +68,7 @@
           </tbody>
           <tbody *ngIf="sortedData.length === 0">
             <tr>
-              <th colspan="9" rowspan="1" class="text-center"> Không có danh sách </th>
+              <th colspan="10" rowspan="1" class="text-center"> Không có danh sách </th>
             </tr>
           </tbody>
         </table>

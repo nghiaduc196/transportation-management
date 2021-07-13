@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class ReportWorkService {
   constructor(private http: HttpClient) {}
 
   getAll(param?): Observable<HttpResponse<any>> {
-    return this.http.get<any>(this.SERVER_API_URL + 'report-work', {params: param, observe: 'response'});
+    const data = _.omitBy(param, _.isNil);
+    return this.http.get<any>(this.SERVER_API_URL + 'report-work', {params: data, observe: 'response'});
   }
 
   create(body): Observable<any> {

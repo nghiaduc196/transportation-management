@@ -101,21 +101,35 @@ public class ReportWorkService {
         return result;
     }
 
-    public Page<ReportWork> filter(ReportWorkRequestDTO requestDTO, Pageable pageable) {
+    public Page<ReportWork> filter(ReportWorkRequestDTO requestDTO, String name, Date createdDateFrom, Date createdDateTo, Date implementationDateFrom, Date implementationDateTo, Pageable pageable) {
         log.debug("call filter method {}", requestDTO);
         Boolean isAdmin = false;
-        Instant startDate = null;
-        Instant endDate = null;
+        Instant createdDateStart = null;
+        Instant createdDateEnd = null;
+        Instant implementationDateStart = null;
+        Instant implementationDateEnd = null;
+
         Calendar calendar = Calendar.getInstance();
-        if (requestDTO.getStartDate() != null) {
-            calendar.setTime(requestDTO.getStartDate());
-            startDate = calendar.getTime().toInstant();
+        if (createdDateFrom != null) {
+            calendar.setTime(createdDateFrom);
+            createdDateStart = calendar.getTime().toInstant();
         }
-        if (requestDTO.getEndDate() != null) {
-            calendar.setTime(requestDTO.getEndDate());
+        if (createdDateTo != null) {
+            calendar.setTime(createdDateTo);
             calendar.add(Calendar.DATE, 1);
-            endDate =  calendar.getTime().toInstant();
+            createdDateEnd =  calendar.getTime().toInstant();
         }
+        // ================================= //
+        if (implementationDateFrom != null) {
+            calendar.setTime(implementationDateFrom);
+            implementationDateStart = calendar.getTime().toInstant();
+        }
+        if (implementationDateTo != null) {
+            calendar.setTime(implementationDateTo);
+            calendar.add(Calendar.DATE, 1);
+            implementationDateEnd =  calendar.getTime().toInstant();
+        }
+
         User user = userService.getUserWithAuthorities().orElse(null);
         for (Authority authority: user.getAuthorities()) {
             if (authority.getName().equals("ROLE_ADMIN")) {
@@ -125,9 +139,9 @@ public class ReportWorkService {
         System.out.println("================================");
         System.out.println(isAdmin);
         if (isAdmin) {
-            return reportWorkRepository.filterForAdmin(pageable);
+            return reportWorkRepository.filterForAdmin(name, createdDateStart, createdDateEnd, implementationDateStart, implementationDateEnd, pageable);
         } else  {
-            return reportWorkRepository.filterForUser(user.getLogin(),pageable);
+            return reportWorkRepository.filterForUser(user.getLogin(), name, createdDateStart, createdDateEnd, implementationDateStart, implementationDateEnd, pageable);
         }
     }
 

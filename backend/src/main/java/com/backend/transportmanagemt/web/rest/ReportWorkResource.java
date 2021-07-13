@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -48,9 +50,15 @@ public class ReportWorkResource {
     }
 
     @GetMapping("/report-work")
-    public ResponseEntity<List<ReportWorkResponseDTO>> filter(ReportWorkRequestDTO requestDTO, Pageable pageable) {
+    public ResponseEntity<List<ReportWorkResponseDTO>> filter(ReportWorkRequestDTO requestDTO,
+                                                              @RequestParam(value = "name", required = false) String name,
+                                                              @RequestParam(value = "createdDateFrom", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date createdDateFrom,
+                                                              @RequestParam(value = "createdDateTo", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date createdDateTo,
+                                                              @RequestParam(value = "implementationDateFrom", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date implementationDateFrom,
+                                                              @RequestParam(value = "implementationDateTo", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date implementationDateTo,
+                                                              Pageable pageable) {
         log.debug("REST request to get report work filter : {}", requestDTO);
-        final Page<ReportWorkResponseDTO> page = reportWorkService.filter(requestDTO, pageable).map(ReportWorkResponseDTO::new);
+        final Page<ReportWorkResponseDTO> page = reportWorkService.filter(requestDTO, name, createdDateFrom, createdDateTo, implementationDateFrom, implementationDateTo, pageable).map(ReportWorkResponseDTO::new);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
