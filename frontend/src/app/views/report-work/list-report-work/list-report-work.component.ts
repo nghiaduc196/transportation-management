@@ -73,6 +73,10 @@ export class ListReportWorkComponent implements OnInit {
   }
 
   paginate($event) {
+    console.log($event);
+    this.pageIndex = $event.page;
+    this.pageSize = $event.rows;
+    this.getListReportWork();
   }
 
   openEdit(data) {}
