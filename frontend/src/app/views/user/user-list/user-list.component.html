@@ -6,42 +6,47 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr style="white-space: nowrap">
-                        <th scope="col">STT</th>
-                        <th scope="col">Tên người dùng</th>
-                        <th scope="col">Trạng thái</th>
-                        <th scope="col">Vị trí làm việc</th>
-                        <th scope="col">Ngày tạo <a style="padding: 0 5px" (click)="sortByDate()"><i
-                                [ngClass]="(sortDesc)?'pi pi-sort-amount-up':'pi pi-sort-amount-down'"></i></a></th>
-                        <th scope="col">Người tạo</th>
-                        <th scope="col">Số điện thoại</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">#</th>
+                      <th scope="col">STT</th>
+                      <th scope="col">Tên người dùng</th>
+                      <th *ngIf="widthScreen > maxWidth" scope="col">Trạng thái</th>
+                      <th *ngIf="widthScreen > maxWidth" scope="col">Vị trí làm việc</th>
+                      <th *ngIf="widthScreen > maxWidth" scope="col">Ngày tạo <a style="padding: 0 5px" (click)="sortByDate()"><i
+                        [ngClass]="(sortDesc)?'pi pi-sort-amount-up':'pi pi-sort-amount-down'"></i></a></th>
+                      <th *ngIf="widthScreen > maxWidth" scope="col">Người tạo</th>
+                      <th *ngIf="widthScreen > maxWidth" scope="col">Số điện thoại</th>
+                      <th *ngIf="widthScreen > maxWidth" scope="col">Email</th>
+                      <th scope="col">Xem BC</th>
+                      <th scope="col">#</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr *ngFor="let user of sortedData; let i = index">
-                        <th scope="row">{{i + 1}}</th>
-                        <td>{{user?.fullName}}</td>
-                        <td *ngIf="!user.activated"><button class="button-none-background" (click)="updateEnable(user)"><span class="badge rounded-pill bg-danger p-2">Không Hoạt động</span></button></td>
-                        <td *ngIf="user.activated"><button class="button-none-background" (click)="updateDisable(user)"><span class="badge rounded-pill bg-success p-2">Hoạt động</span></button></td>
-                        <td>
-                            {{user.position?.name}}
-                        </td>
-                        <td>{{user.createdDate | date:'d/M/yy, h:mm a'}}</td>
-                        <td>{{user.createdBy}}</td>
-                        <td>{{user.phoneNumber ? user.phoneNumber : 'Chưa có số điện thoại'}}</td>
-                        <td>{{user.email ? user.email : 'Chưa có email'}}</td>
-                        <td class="overflow-hidden">
-                          <div ngbDropdown container="body">
-                            <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle><i
-                              class="fa fa-angle-double-down"></i></button>
-                            <div ngbDropdownMenu>
-                              <button ngbDropdownItem (click)="openDialog(user)"><i class="fa fa-eye"></i> Xem </button>
-                              <button ngbDropdownItem [routerLink]="['/user/update', user.login]"><i class="fa fa-edit"></i> Sửa </button>
-                              <button ngbDropdownItem ><i class="fa fa-trash"></i> Xóa </button>
-                            </div>
-                          </div>
-                        </td>
+                      <th scope="row">{{i + 1}}</th>
+                      <td>{{user?.fullName}}</td>
+                      <td *ngIf="!user.activated && widthScreen > maxWidth"><button class="button-none-background" (click)="updateEnable(user)"><span class="badge rounded-pill bg-danger p-2">Không Hoạt động</span></button></td>
+                      <td *ngIf="user.activated && widthScreen > maxWidth"><button class="button-none-background" (click)="updateDisable(user)"><span class="badge rounded-pill bg-success p-2">Hoạt động</span></button></td>
+                      <td *ngIf="widthScreen > maxWidth">
+                        {{user.position?.name}}
+                      </td>
+                      <td *ngIf="widthScreen > maxWidth">{{user.createdDate | date:'d/M/yy, h:mm a'}}</td>
+                      <td *ngIf="widthScreen > maxWidth">{{user.createdBy}}</td>
+                      <td *ngIf="widthScreen > maxWidth">{{user.phoneNumber ? user.phoneNumber : 'Chưa có số điện thoại'}}</td>
+                      <td *ngIf="widthScreen > maxWidth">{{user.email ? user.email : 'Chưa có email'}}</td>
+                      <td ><button class="button-none-background" (click)="routerPage(user.login)"><span class="badge rounded-pill bg-success p-2">Xem BC</span></button></td>
+<!--                      <td class="overflow-hidden">-->
+<!--                          <div ngbDropdown container="body">-->
+<!--                            <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle><i-->
+<!--                              class="fa fa-angle-double-down"></i></button>-->
+<!--                            <div ngbDropdownMenu>-->
+<!--                              <button ngbDropdownItem (click)="openDialog(user)"><i class="fa fa-eye"></i> Xem </button>-->
+<!--                              <button ngbDropdownItem [routerLink]="['/user/update', user.login]"><i class="fa fa-edit"></i> Sửa </button>-->
+<!--                              <button ngbDropdownItem ><i class="fa fa-trash"></i> Xóa </button>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                      </td>-->
+                      <td>
+                         <button class="btn btn-link" [routerLink]="['/user/update', user.login]"><i class="fa fa-edit"></i> Sửa </button>
+                      </td>
                     </tr>
                     </tbody>
                 </table>
@@ -52,7 +57,7 @@
     </div>
 </div>
 <p-confirmDialog [style]="{width: 'auto'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" acceptLabel="Đồng ý" rejectLabel="Hủy"></p-confirmDialog>
-<p-dialog [(visible)]="display" [positionTop]="50" [style]="{ width: '70vw' }" [baseZIndex]="10000" [modal]="true" [blockScroll]="true">
+<p-dialog [(visible)]="display" [positionTop]="50" [style]="{ width: '90vw' }" [baseZIndex]="10000" [modal]="true" [blockScroll]="true">
   <ng-template pTemplate="header">
     <p class="page-header">Thông tin chi tiết tài khoản <span> #{{user?.login}} </span> </p>
   </ng-template>
@@ -60,7 +65,7 @@
     <div class="row">
       <div class="col-md-6 mt-3">
         <div class="p-field">
-          <p>Họ tên: <span>{{user?.firstName}} {{user?.lastName}}</span></p>
+          <p>Họ tên: <span>{{user?.fullName}}</span></p>
         </div>
       </div>
       <div class="col-md-6 mt-3">

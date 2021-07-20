@@ -32,6 +32,14 @@ const routes: Routes = [
     }
   },
   {
+    path: ':login/list',
+    canActivate: [UserRouteAccessService],
+    component: ListReportWorkComponent,
+    data: {
+      title: 'Danh sách báo cáo công việc'
+    }
+  },
+  {
     path: 'create',
     canActivate: [UserRouteAccessService],
     component: UpdateReportWorkComponent,

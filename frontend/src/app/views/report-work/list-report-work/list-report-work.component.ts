@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ReportWorkService} from '../../../core/services/report-work.service';
 import {FormControl} from '@angular/forms';
 import * as moment from 'moment';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-list-report-work',
@@ -22,7 +23,11 @@ export class ListReportWorkComponent implements OnInit {
   createdDateTo: any;
   implementationDateFrom: any;
   implementationDateTo: any;
-  constructor(private reportWorkService: ReportWorkService) { }
+  loginUser: any;
+  constructor(private reportWorkService: ReportWorkService, private activatedRoute: ActivatedRoute) {
+    this.loginUser = this.activatedRoute.snapshot.paramMap.get('login');
+    console.log(this.activatedRoute.snapshot.paramMap.get('login')); // Print the parameter to the console.
+  }
 
   ngOnInit(): void {
     this.getListReportWork();
@@ -57,6 +62,7 @@ export class ListReportWorkComponent implements OnInit {
       sort: this.sort,
       createdDateFrom: this.createdDateFrom,
       createdDateTo: this.createdDateTo,
+      login: this.loginUser,
       name: this.name.value,
       implementationDateFrom: this.implementationDateFrom,
       implementationDateTo: this.implementationDateTo

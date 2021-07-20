@@ -19,6 +19,8 @@ export class UserListComponent implements OnInit {
   pageSizeOption = [5, 10, 20];
   display = false;
   user: any;
+  widthScreen: any;
+  maxWidth = 991;
   constructor(private userService: UserService,
               private router: Router,
               private confirmationService: ConfirmationService,
@@ -26,6 +28,7 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterUser();
+    this.widthScreen = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
   }
 
   filterUser(sort ?): any {
@@ -52,6 +55,11 @@ export class UserListComponent implements OnInit {
 
   gotoDetail(login?): void {
     this.router.navigate(['user/detail', login]);
+  }
+
+  routerPage(login?): void {
+    this.router.navigate(['report-work', login, 'list']);
+
   }
 
   updateEnable(data?) {

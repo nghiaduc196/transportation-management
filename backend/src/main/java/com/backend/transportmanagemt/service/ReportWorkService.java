@@ -101,7 +101,7 @@ public class ReportWorkService {
         return result;
     }
 
-    public Page<ReportWork> filter(ReportWorkRequestDTO requestDTO, String name, Date createdDateFrom, Date createdDateTo, Date implementationDateFrom, Date implementationDateTo, Pageable pageable) {
+    public Page<ReportWork> filter(ReportWorkRequestDTO requestDTO,String login, String name, Date createdDateFrom, Date createdDateTo, Date implementationDateFrom, Date implementationDateTo, Pageable pageable) {
         log.debug("call filter method {}", requestDTO);
         Boolean isAdmin = false;
         Instant createdDateStart = null;
@@ -139,7 +139,7 @@ public class ReportWorkService {
         System.out.println("================================");
         System.out.println(isAdmin);
         if (isAdmin) {
-            return reportWorkRepository.filterForAdmin(name, createdDateStart, createdDateEnd, implementationDateStart, implementationDateEnd, pageable);
+            return reportWorkRepository.filterForAdmin(login, name, createdDateStart, createdDateEnd, implementationDateStart, implementationDateEnd, pageable);
         } else  {
             return reportWorkRepository.filterForUser(user.getLogin(), name, createdDateStart, createdDateEnd, implementationDateStart, implementationDateEnd, pageable);
         }
